@@ -1,0 +1,17 @@
+apply plugin: 'application'
+
+mainClassName = 'me.yuanhao.AppRun'
+
+dependencies {
+    compile project(':jfoenix')
+
+    // NOTE: the latest version _is_ 8.0.1!
+    // 8.0.7 was published by mistake
+    compile 'io.datafx:datafx:8.0.1'
+    compile 'io.datafx:flow:8.0.1'
+
+    // FontAwesome
+    // Versions higher than 2.x are for Java 11
+    compile 'org.kordamp.ikonli:ikonli-javafx:2.4.0'
+    compile 'org.kordamp.ikonli:ikonli-fontawesome5-pack:2.4.0'
+}

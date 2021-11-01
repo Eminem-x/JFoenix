@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<StackPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1"
+           xmlns="http://javafx.com/javafx/2.2">
+    <BorderPane>
+        <top>
+            <VBox spacing="20">
+                <JFXToolbar>
+                    <leftItems>
+                        <JFXRippler maskType="CIRCLE" style="-fx-ripple-color:WHITE;">
+                            <StackPane fx:id="titleBurgerContainer">
+                                <JFXHamburger fx:id="titleBurger">
+                                    <HamburgerBackArrowBasicTransition/>
+                                </JFXHamburger>
+                            </StackPane>
+                        </JFXRippler>
+                        <JFXRippler maskType="CIRCLE" style="-fx-ripple-color:WHITE;">
+                            <HBox fx:id="test">
+                                <JFXButton fx:id="fileContainer" prefWidth="100" prefHeight="40"
+                                           buttonType="RAISED" text="文件" textFill="white"
+                                           style="-fx-font-size: 20px;-fx-font-family: 'Gabriola';">
+                                </JFXButton>
+                                <JFXButton fx:id="startContainer" prefWidth="100" prefHeight="40"
+                                           buttonType="RAISED" text="开始" textFill="white"
+                                           style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">
+                                </JFXButton>
+                                <JFXButton fx:id="insertContainer" prefWidth="100" prefHeight="40"
+                                           buttonType="RAISED" text="插入" textFill="white"
+                                           style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">
+                                </JFXButton>
+                                <JFXButton fx:id="editorContainer" prefWidth="100" prefHeight="40"
+                                           buttonType="RAISED" text="编辑" textFill="white"
+                                           style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">
+                                </JFXButton>
+                                <JFXButton fx:id="showContainer" prefWidth="140" prefHeight="40"
+                                           buttonType="RAISED" text="幻灯片放映" textFill="white"
+                                           style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">
+                                </JFXButton>
+                            </HBox>
+                        </JFXRippler>
+                    </leftItems>
+                    <rightItems>
+                        <JFXRippler fx:id="optionsRippler" maskType="CIRCLE"
+                                    style="-fx-ripple-color:WHITE;">
+                            <StackPane fx:id="optionsBurger">
+                                <JFXHamburger styleClass="jfx-options-burger">
+                                </JFXHamburger>
+                            </StackPane>
+                        </JFXRippler>
+                    </rightItems>
+                </JFXToolbar>
+            </VBox>
+        </top>
+    </BorderPane>
+</StackPane>
