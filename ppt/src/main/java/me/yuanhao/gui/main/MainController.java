@@ -11,6 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
+import me.yuanhao.gui.main.topmenu.AboutController;
+import me.yuanhao.gui.main.topmenu.FileController;
 
 import javax.annotation.PostConstruct;
 
@@ -36,6 +38,9 @@ public class MainController {
 
     @FXML
     private StackPane optionsBurger;
+
+    @FXML
+    private StackPane fileBurger;
 
     private JFXPopup toolbarPopup;
 
@@ -66,7 +71,7 @@ public class MainController {
 
         //init the title pop up in the right item
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ui/popup/MainPopup.fxml"));
-        loader.setController(new InputController());
+        loader.setController(new AboutController());
         toolbarPopup = new JFXPopup(loader.load());
 
         optionsBurger.setOnMouseClicked(e ->
@@ -78,21 +83,16 @@ public class MainController {
         JFXTooltip.setVisibleDuration(Duration.millis(3000));
         JFXTooltip.install(titleBurgerContainer, burgerTooltip, Pos.BOTTOM_CENTER);
 
+        loader = new FXMLLoader(getClass().getResource("/fxml/ui/popup/FilePopup.fxml"));
+        loader.setController(new FileController());
+        toolbarPopup = new JFXPopup(loader.load());
 
-
-
-    }
-
-    public static final class InputController {
-        @FXML
-        private JFXListView<?> toolbarPopupList;
-
-        // close application
-        @FXML
-        private void submit() {
-            if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 1) {
-                Platform.exit();
-            }
-        }
+        fileBurger.setOnMouseClicked(e ->
+                toolbarPopup.show(optionsBurger,
+                    JFXPopup.PopupVPosition.TOP,
+                    JFXPopup.PopupHPosition.LEFT,
+                    -1300,
+                    15));
+        JFXTooltip.setVisibleDuration(Duration.millis(3000));
     }
 }
