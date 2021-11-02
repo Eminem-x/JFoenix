@@ -10,7 +10,6 @@ import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTooltip;
 import demos.datafx.ExtendedAnimatedFlowContainer;
 import demos.gui.sidemenu.SideMenuController;
-import demos.gui.uicomponents.ButtonController;
 import demos.gui.uicomponents.SpinnerController;
 import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.Flow;
