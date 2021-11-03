@@ -48,6 +48,8 @@ public class MainController {
     private JFXPopup toolbarPopup;
     private JFXPopup fileBarPopup;
     private JFXPopup insertBarPopup;
+    private JFXPopup editorBarPopup;
+    private JFXPopup showBarPopup;
 
     @PostConstruct
     public void init() throws Exception{
@@ -79,6 +81,8 @@ public class MainController {
         loadController("/fxml/ui/popup/AboutPopup.fxml","me.yuanhao.gui.main.topmenu.AboutController",toolbarPopup,optionsBurger);
         loadController("/fxml/ui/popup/FilePopup.fxml","me.yuanhao.gui.main.topmenu.FileController",fileBarPopup,fileBurger);
         loadController("/fxml/ui/popup/InsertPopup.fxml","me.yuanhao.gui.main.topmenu.InsertController",insertBarPopup,insertBurger);
+        loadController("/fxml/ui/popup/EditorPopup.fxml","me.yuanhao.gui.main.topmenu.EditorController",editorBarPopup,editorBurger);
+        loadController("/fxml/ui/popup/ShowPopup.fxml","me.yuanhao.gui.main.topmenu.ShowController",showBarPopup,showBurger);
     }
 
     private void loadController(String resource,String controller,JFXPopup popup,StackPane burger) throws Exception{
