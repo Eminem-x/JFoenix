@@ -11,7 +11,7 @@
         从头放映
         <graphic>
             <StackPane styleClass="custom-jfx-list-view-icon-container">
-                <FontIcon iconLiteral="far-user" iconSize="18" styleClass="option-jfx-list-view-icon"/>
+                <FontIcon iconLiteral="fas-play" iconSize="18" styleClass="option-jfx-list-view-icon"/>
             </StackPane>
         </graphic>
     </Label>
@@ -19,7 +19,7 @@
         当前放映
         <graphic>
             <StackPane styleClass="custom-jfx-list-view-icon-container">
-                <FontIcon iconLiteral="fas-reply" iconSize="18" styleClass="option-jfx-list-view-icon"/>
+                <FontIcon iconLiteral="fas-play-circle" iconSize="18" styleClass="option-jfx-list-view-icon"/>
             </StackPane>
         </graphic>
     </Label>

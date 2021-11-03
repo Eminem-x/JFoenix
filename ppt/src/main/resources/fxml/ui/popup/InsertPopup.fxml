@@ -11,7 +11,7 @@
         图片
         <graphic>
             <StackPane styleClass="custom-jfx-list-view-icon-container">
-                <FontIcon iconLiteral="far-user" iconSize="18" styleClass="option-jfx-list-view-icon"/>
+                <FontIcon iconLiteral="far-image" iconSize="18" styleClass="option-jfx-list-view-icon"/>
             </StackPane>
         </graphic>
     </Label>
@@ -19,7 +19,7 @@
         文本框
         <graphic>
             <StackPane styleClass="custom-jfx-list-view-icon-container">
-                <FontIcon iconLiteral="fas-reply" iconSize="18" styleClass="option-jfx-list-view-icon"/>
+                <FontIcon iconLiteral="fas-language" iconSize="18" styleClass="option-jfx-list-view-icon"/>
             </StackPane>
         </graphic>
     </Label>
@@ -27,7 +27,7 @@
         形状
         <graphic>
             <StackPane styleClass="custom-jfx-list-view-icon-container">
-                <FontIcon iconLiteral="fas-reply" iconSize="18" styleClass="option-jfx-list-view-icon"/>
+                <FontIcon iconLiteral="fas-square" iconSize="18" styleClass="option-jfx-list-view-icon"/>
             </StackPane>
         </graphic>
     </Label>
