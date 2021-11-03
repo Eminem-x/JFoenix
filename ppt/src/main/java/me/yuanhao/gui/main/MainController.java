@@ -84,19 +84,31 @@ public class MainController {
         loadController("/fxml/ui/popup/EditorPopup.fxml","me.yuanhao.gui.main.topmenu.EditorController",editorBarPopup,editorBurger);
         loadController("/fxml/ui/popup/ShowPopup.fxml","me.yuanhao.gui.main.topmenu.ShowController",showBarPopup,showBurger);
     }
-
+    
     private void loadController(String resource,String controller,JFXPopup popup,StackPane burger) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
         loader.setController(Class.forName(controller).newInstance());
         popup = new JFXPopup(loader.load());
 
+        //pop up the about from left
+        String fxmlName = "/fxml/ui/popup/AboutPopup.fxml";
         JFXPopup finalPopup = popup;
-        burger.setOnMouseClicked(e ->
-            finalPopup.show(burger,
-                JFXPopup.PopupVPosition.TOP,
-                JFXPopup.PopupHPosition.LEFT,
-                -12,
-                15));
+        if(fxmlName.equals(resource)) {
+            burger.setOnMouseClicked(e ->
+                finalPopup.show(burger,
+                    JFXPopup.PopupVPosition.TOP,
+                    JFXPopup.PopupHPosition.RIGHT,
+                    -12,
+                    15));
+        } else {
+            burger.setOnMouseClicked(e ->
+                finalPopup.show(burger,
+                    JFXPopup.PopupVPosition.TOP,
+                    JFXPopup.PopupHPosition.LEFT,
+                    -12,
+                    15));
+
+        }
         JFXTooltip.setVisibleDuration(Duration.millis(3000));
     }
 }
