@@ -4,11 +4,13 @@ import com.jfoenix.controls.JFXListView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
+/**
+ * @author Yuanhao
+ */
 public class AboutController {
     @FXML
     private JFXListView<?> toolbarPopupList;
 
-    // close application
     @FXML
     private void submit() {
         if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 1) {
