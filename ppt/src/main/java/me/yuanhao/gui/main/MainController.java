@@ -10,9 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import me.yuanhao.gui.main.topmenu.AboutController;
-import me.yuanhao.gui.main.topmenu.FileController;
-import me.yuanhao.gui.main.topmenu.InsertController;
 
 import javax.annotation.PostConstruct;
 
@@ -49,6 +46,8 @@ public class MainController {
     private StackPane showBurger;
 
     private JFXPopup toolbarPopup;
+    private JFXPopup fileBarPopup;
+    private JFXPopup insertBarPopup;
 
     @PostConstruct
     public void init() throws Exception{
@@ -75,39 +74,21 @@ public class MainController {
             }
         });
 
-        //init the title pop up in the right item
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ui/popup/MainPopup.fxml"));
-        loader.setController(new AboutController());
-        toolbarPopup = new JFXPopup(loader.load());
-
-        optionsBurger.setOnMouseClicked(e ->
-            toolbarPopup.show(optionsBurger,
-                JFXPopup.PopupVPosition.TOP,
-                JFXPopup.PopupHPosition.RIGHT,
-                -12,
-                15));
-        JFXTooltip.setVisibleDuration(Duration.millis(3000));
         JFXTooltip.install(titleBurgerContainer, burgerTooltip, Pos.BOTTOM_CENTER);
 
-        FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/fxml/ui/popup/FilePopup.fxml"));
-        fileLoader.setController(new FileController());
-        toolbarPopup = new JFXPopup(fileLoader.load());
+        loadController("/fxml/ui/popup/AboutPopup.fxml","me.yuanhao.gui.main.topmenu.AboutController",toolbarPopup,optionsBurger);
+        loadController("/fxml/ui/popup/FilePopup.fxml","me.yuanhao.gui.main.topmenu.FileController",fileBarPopup,fileBurger);
+        loadController("/fxml/ui/popup/InsertPopup.fxml","me.yuanhao.gui.main.topmenu.InsertController",insertBarPopup,insertBurger);
+    }
 
-        fileBurger.setOnMouseClicked(e -> {
-                toolbarPopup.show(fileBurger,
-                    JFXPopup.PopupVPosition.TOP,
-                    JFXPopup.PopupHPosition.LEFT,
-                    -12,
-                    15);
-        });
-        JFXTooltip.setVisibleDuration(Duration.millis(3000));
+    private void loadController(String resource,String controller,JFXPopup popup,StackPane burger) throws Exception{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
+        loader.setController(Class.forName(controller).newInstance());
+        popup = new JFXPopup(loader.load());
 
-        FXMLLoader insertLoader = new FXMLLoader(getClass().getResource("/fxml/ui/popup/InsertPopup.fxml"));
-        insertLoader.setController(new InsertController());
-        toolbarPopup = new JFXPopup(insertLoader.load());
-
-        insertBurger.setOnMouseClicked(e ->
-            toolbarPopup.show(insertBurger,
+        JFXPopup finalPopup = popup;
+        burger.setOnMouseClicked(e ->
+            finalPopup.show(burger,
                 JFXPopup.PopupVPosition.TOP,
                 JFXPopup.PopupHPosition.LEFT,
                 -12,
