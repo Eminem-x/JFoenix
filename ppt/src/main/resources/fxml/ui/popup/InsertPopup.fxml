@@ -5,18 +5,18 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <JFXListView fx:id="toolbarPopupList" styleClass="option-list-view"
-             onMouseClicked="#file"
+             onMouseClicked="#insert"
              xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <Label>
-        保存文件
+        图片
         <graphic>
             <StackPane styleClass="custom-jfx-list-view-icon-container">
-                <FontIcon iconLiteral="far-file" iconSize="18" styleClass="option-jfx-list-view-icon"/>
+                <FontIcon iconLiteral="far-user" iconSize="18" styleClass="option-jfx-list-view-icon"/>
             </StackPane>
         </graphic>
     </Label>
     <Label>
-        打开文件
+        文本框
         <graphic>
             <StackPane styleClass="custom-jfx-list-view-icon-container">
                 <FontIcon iconLiteral="fas-reply" iconSize="18" styleClass="option-jfx-list-view-icon"/>
@@ -24,7 +24,7 @@
         </graphic>
     </Label>
     <Label>
-        另存为
+        形状
         <graphic>
             <StackPane styleClass="custom-jfx-list-view-icon-container">
                 <FontIcon iconLiteral="fas-reply" iconSize="18" styleClass="option-jfx-list-view-icon"/>

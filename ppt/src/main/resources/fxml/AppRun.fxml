@@ -19,40 +19,38 @@
                                 </JFXHamburger>
                             </StackPane>
                         </JFXRippler>
-                        <JFXRippler maskType="CIRCLE" style="-fx-ripple-color:WHITE;">
-                            <HBox fx:id="test">
-                                <JFXRippler fx:id="fileRippler" maskType="CIRCLE"
-                                            style="-fx-ripple-color:WHITE;">
-                                    <StackPane fx:id="fileBurger">
-                                        <Label style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">文件</Label>
-                                    </StackPane>
-                                </JFXRippler>
-                                <JFXRippler fx:id="startRippler" maskType="CIRCLE"
-                                            style="-fx-ripple-color:WHITE;">
-                                    <StackPane fx:id="startBurger">
-                                        <Label style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">开始</Label>
-                                    </StackPane>
-                                </JFXRippler>
-                                <JFXRippler fx:id="insertRippler" maskType="CIRCLE"
-                                            style="-fx-ripple-color:WHITE;">
-                                    <StackPane fx:id="insertBurger">
-                                        <Label style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">插入</Label>
-                                    </StackPane>
-                                </JFXRippler>
-                                <JFXRippler fx:id="editorRippler" maskType="CIRCLE"
-                                            style="-fx-ripple-color:WHITE;">
-                                    <StackPane fx:id="editorBurger">
-                                        <Label style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">编辑</Label>
-                                    </StackPane>
-                                </JFXRippler>
-                                <JFXRippler fx:id="showRippler" maskType="CIRCLE"
-                                            style="-fx-ripple-color:WHITE;">
-                                    <StackPane fx:id="showBurger">
-                                        <Label style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">幻灯片放映</Label>
-                                    </StackPane>
-                                </JFXRippler>
-                            </HBox>
-                        </JFXRippler>
+                        <HBox fx:id="test">
+                            <JFXRippler fx:id="fileRippler" maskType="CIRCLE"
+                                        style="-fx-ripple-color:WHITE;">
+                                <StackPane fx:id="fileBurger">
+                                    <Label style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">文件</Label>
+                                </StackPane>
+                            </JFXRippler>
+                            <JFXRippler fx:id="startRippler" maskType="CIRCLE"
+                                        style="-fx-ripple-color:WHITE;">
+                                <StackPane fx:id="startBurger">
+                                    <Label style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">开始</Label>
+                                </StackPane>
+                            </JFXRippler>
+                            <JFXRippler fx:id="insertRippler" maskType="CIRCLE"
+                                        style="-fx-ripple-color:WHITE;">
+                                <StackPane fx:id="insertBurger">
+                                    <Label style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">插入</Label>
+                                </StackPane>
+                            </JFXRippler>
+                            <JFXRippler fx:id="editorRippler" maskType="CIRCLE"
+                                        style="-fx-ripple-color:WHITE;">
+                                <StackPane fx:id="editorBurger">
+                                    <Label style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">编辑</Label>
+                                </StackPane>
+                            </JFXRippler>
+                            <JFXRippler fx:id="showRippler" maskType="CIRCLE"
+                                        style="-fx-ripple-color:WHITE;">
+                                <StackPane fx:id="showBurger">
+                                    <Label style="-fx-font-size: 20px;-fx-font-family: 'Gabriola'">幻灯片放映</Label>
+                                </StackPane>
+                            </JFXRippler>
+                        </HBox>
                     </leftItems>
                     <rightItems>
                         <JFXRippler fx:id="optionsRippler" maskType="CIRCLE"

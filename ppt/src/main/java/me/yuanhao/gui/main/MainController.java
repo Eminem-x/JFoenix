@@ -5,7 +5,6 @@ import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
 import javafx.animation.Transition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -13,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import me.yuanhao.gui.main.topmenu.AboutController;
 import me.yuanhao.gui.main.topmenu.FileController;
+import me.yuanhao.gui.main.topmenu.InsertController;
 
 import javax.annotation.PostConstruct;
 
@@ -41,6 +41,12 @@ public class MainController {
 
     @FXML
     private StackPane fileBurger;
+    @FXML
+    private StackPane insertBurger;
+    @FXML
+    private StackPane editorBurger;
+    @FXML
+    private StackPane showBurger;
 
     private JFXPopup toolbarPopup;
 
@@ -83,16 +89,29 @@ public class MainController {
         JFXTooltip.setVisibleDuration(Duration.millis(3000));
         JFXTooltip.install(titleBurgerContainer, burgerTooltip, Pos.BOTTOM_CENTER);
 
-        loader = new FXMLLoader(getClass().getResource("/fxml/ui/popup/FilePopup.fxml"));
-        loader.setController(new FileController());
-        toolbarPopup = new JFXPopup(loader.load());
+        FXMLLoader fileLoader = new FXMLLoader(getClass().getResource("/fxml/ui/popup/FilePopup.fxml"));
+        fileLoader.setController(new FileController());
+        toolbarPopup = new JFXPopup(fileLoader.load());
 
-        fileBurger.setOnMouseClicked(e ->
-                toolbarPopup.show(optionsBurger,
+        fileBurger.setOnMouseClicked(e -> {
+                toolbarPopup.show(fileBurger,
                     JFXPopup.PopupVPosition.TOP,
                     JFXPopup.PopupHPosition.LEFT,
-                    -1300,
-                    15));
+                    -12,
+                    15);
+        });
+        JFXTooltip.setVisibleDuration(Duration.millis(3000));
+
+        FXMLLoader insertLoader = new FXMLLoader(getClass().getResource("/fxml/ui/popup/InsertPopup.fxml"));
+        insertLoader.setController(new InsertController());
+        toolbarPopup = new JFXPopup(insertLoader.load());
+
+        insertBurger.setOnMouseClicked(e ->
+            toolbarPopup.show(insertBurger,
+                JFXPopup.PopupVPosition.TOP,
+                JFXPopup.PopupHPosition.LEFT,
+                -12,
+                15));
         JFXTooltip.setVisibleDuration(Duration.millis(3000));
     }
 }
