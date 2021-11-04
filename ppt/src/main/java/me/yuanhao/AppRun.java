@@ -54,7 +54,7 @@ public class AppRun extends Application {
             Rectangle2D bounds = Screen.getScreens().get(0).getBounds();
             width = bounds.getWidth() / 1.31;
             height = bounds.getHeight() / 1.2;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

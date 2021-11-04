@@ -15,7 +15,7 @@ public class ShowController {
     private void show() {
         if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 1) {
             Platform.exit();
-        } else if(toolbarPopupList.getSelectionModel().getSelectedIndex() == 0) {
+        } else if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 0) {
             System.out.println(123456);
         }
     }

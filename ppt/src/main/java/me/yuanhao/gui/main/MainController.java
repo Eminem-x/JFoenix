@@ -52,7 +52,7 @@ public class MainController {
     private JFXPopup showBarPopup;
 
     @PostConstruct
-    public void init() throws Exception{
+    public void init() throws Exception {
         // init the title hamburger icon
         final JFXTooltip burgerTooltip = new JFXTooltip("Open drawer");
 
@@ -78,14 +78,14 @@ public class MainController {
 
         JFXTooltip.install(titleBurgerContainer, burgerTooltip, Pos.BOTTOM_CENTER);
 
-        loadController("/fxml/ui/popup/AboutPopup.fxml","me.yuanhao.gui.main.topmenu.AboutController",toolbarPopup,optionsBurger);
-        loadController("/fxml/ui/popup/FilePopup.fxml","me.yuanhao.gui.main.topmenu.FileController",fileBarPopup,fileBurger);
-        loadController("/fxml/ui/popup/InsertPopup.fxml","me.yuanhao.gui.main.topmenu.InsertController",insertBarPopup,insertBurger);
-        loadController("/fxml/ui/popup/EditorPopup.fxml","me.yuanhao.gui.main.topmenu.EditorController",editorBarPopup,editorBurger);
-        loadController("/fxml/ui/popup/ShowPopup.fxml","me.yuanhao.gui.main.topmenu.ShowController",showBarPopup,showBurger);
+        loadController("/fxml/ui/popup/AboutPopup.fxml", "me.yuanhao.gui.main.topmenu.AboutController", toolbarPopup, optionsBurger);
+        loadController("/fxml/ui/popup/FilePopup.fxml", "me.yuanhao.gui.main.topmenu.FileController", fileBarPopup, fileBurger);
+        loadController("/fxml/ui/popup/InsertPopup.fxml", "me.yuanhao.gui.main.topmenu.InsertController", insertBarPopup, insertBurger);
+        loadController("/fxml/ui/popup/EditorPopup.fxml", "me.yuanhao.gui.main.topmenu.EditorController", editorBarPopup, editorBurger);
+        loadController("/fxml/ui/popup/ShowPopup.fxml", "me.yuanhao.gui.main.topmenu.ShowController", showBarPopup, showBurger);
     }
-    
-    private void loadController(String resource,String controller,JFXPopup popup,StackPane burger) throws Exception{
+
+    private void loadController(String resource, String controller, JFXPopup popup, StackPane burger) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
         loader.setController(Class.forName(controller).newInstance());
         popup = new JFXPopup(loader.load());
@@ -93,7 +93,7 @@ public class MainController {
         //pop up the about from left
         String fxmlName = "/fxml/ui/popup/AboutPopup.fxml";
         JFXPopup finalPopup = popup;
-        if(fxmlName.equals(resource)) {
+        if (fxmlName.equals(resource)) {
             burger.setOnMouseClicked(e ->
                 finalPopup.show(burger,
                     JFXPopup.PopupVPosition.TOP,
