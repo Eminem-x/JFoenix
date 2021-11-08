@@ -1,249 +1,64 @@
-[![HitCount](http://hits.dwyl.io/jfoenixadmin/JFoenix.svg)](http://hits.dwyl.io/jfoenixadmin/JFoenix)
-[![][CircleCI img]][CircleCI]
-[![][mavenbadge img]][mavenbadge]
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jfoenixadmin_JFoenix&metric=alert_status)](https://sonarcloud.io/dashboard?id=jfoenixadmin_JFoenix)
-[![][gitter img]][gitter]
-[![Backers on Open Collective](https://opencollective.com/JFoenix/backers/badge.svg)](#backers) 
-[![GitHub forks](https://img.shields.io/github/forks/jfoenixadmin/JFoenix.svg)](https://github.com/jfoenixadmin/JFoenix/network)
-[![GitHub issues](https://img.shields.io/github/issues/jfoenixadmin/JFoenix.svg)](https://github.com/jfoenixadmin/JFoenix/issues)
-[![GitHub license](https://img.shields.io/github/license/jfoenixadmin/JFoenix.svg)](https://github.com/jfoenixadmin/JFoenix/blob/master/LICENSE)
----
+### 内容要求
 
-<h1 align="center">
-    <img src="http://www.jfoenix.com/img/logo-JFX.png">
-</h1>
-<p align="center">
-<sup>
-<b>JFoenix is an open source Java library, that implements Google Material Design using Java components</b>
-</sup>
-</p>
+1. **内容：开发一个简易的幻灯片制作与播放软件**
 
-* [JFoenix Site](http://www.jfoenix.com)
-* JFoenix for Java 9 - [download jar](https://search.maven.org/remotecontent?filepath=com/jfoenix/jfoenix/9.0.10/jfoenix-9.0.10.jar) (9.x.x)
-* JFoenix for Java 8 - [download jar](https://search.maven.org/remotecontent?filepath=com/jfoenix/jfoenix/8.0.10/jfoenix-8.0.10.jar) (8.x.x)
-* JFoenix for Android - [download jar](https://search.maven.org/remotecontent?filepath=com/jfoenix/jfoenix/8.0.10/jfoenix-8.0.10-retrolambda.jar)
-* Released builds are available from [Maven Central](http://search.maven.org/#search%7Cga%7C1%7CJFoenix)
+2. **基本功能：**
 
-# Using JFoenix already?
-Feel free to create a pull request for adding a link to your project in JFoenix github.
-* One more thing, all contributions are appreciated. Don't hesitate to add your own contributions to JFoenix :)
+   1. 新建幻灯片，幻灯片由不少于一个页面组成
+   2. 新建一个空白的幻灯片页面
+   3. 打开或保存整个幻灯片
+   4. 在幻灯片页面上绘制基本图形
+   5. 在幻灯片页面上绘制任意直线
+   6. 添加文字
+   7. 设定颜色与文字风格
+   8. 对幻灯片页面上已有的基本图形、线形、文字进行选取和移动
+   9. 通过鼠标拖动完成上述绘制和添加文字等操作
 
-If you like JFoenix :) and want to support this project, you can become a backer on <a href="https://www.patreon.com/shadishaheen">Patreon</a> or <a href="https://opencollective.com/jfoenix">Open Collective</a>.
+3. **选作功能：**
 
-# Projects using JFoenix
-* <a href="http://bcozy.org">BCozy</a>
-* <a href="https://github.com/ThijsZijdel/Corendon-LostLuggage">Corendon LostLuggage</a>
-* <a href="https://github.com/afsalashyana/Library-Assistant">Library Assistant</a>
-* <a href="https://github.com/badarshahzad/Jfx-Browser">JFX-Browser</a>
-* <a href="https://github.com/huanghongxun/HMCL">HMCL</a> - Hello Minecraft! Launcher 
-* By <a href="https://github.com/anongrp">Anongrp</a> in several projects: 
-<a href="https://github.com/anongrp/Phony">Phony</a>,
-<a href="https://github.com/anongrp/ThunderGet">ThunderGet</a>,
-<a href="https://github.com/anongrp/Portume">Portume</a>
-* By <a href="https://github.com/goxr3plus">GOXR3PLUS</a> in:
-<a href="https://github.com/goxr3plus/XR3Player">XR3Player</a>,
-<a href="https://github.com/goxr3plus/JavaFX-Web-Browser">JAVAFX WEB Browser</a>
-* <a href="https://github.com/bkenn/KFoenix">KFoenix</a>
-* <a href="https://github.com/SeynalKim/JavaFXCalendar">JavaFXCalendar</a>
-* <a href="https://bitbucket.org/NiNi94/oop16-jlearn/src/master/">JLearn</a> A Juicy Learning app
-* <a href="https://github.com/rohan23chhabra/p2p">P2P</a> A peer to peer software
-* <a href="https://github.com/DropSnorz/OwlPlug">OwlPlug</a> An Audio plugin manager
-* <a href="https://github.com/RubbaBoy/MSPaintIDE">MS Paint IDE</a> Programming in MS Paint
-* <a href="https://github.com/fl0wo/TradingFX">TradingFX</a> BitCoin value monitor in real time
-* <a href="https://github.com/silentsoft/actlist">Actlist</a> An utility platform to execute your desire things
-* <a href="https://github.com/Giulianini/Jestures">Jestures</a> A simple framework for gesture recognition in Java
-* <a href="https://github.com/Shehanka/RentLio">RentLio</a> Vehicle Reservation System with RMI Technology
-* <a href="https://github.com/ianspryn/Magis">Magis</a> A Computer Aided Instruction Program
-* Other small projects <a href="https://github.com/mayuso/JMarkPad">JMarkPad</a>,
-<a href="https://github.com/naeemkhan12/CurrencyConverter.git">Currency Converter</a>,
-<a href="https://github.com/Anikeshpatel/ColorCode-Pro">ColorCode Pro</a>
-* <a href="https://github.com/ykrasik/gamedex">GameDex</a> A digital game collection management application
-* <a href="https://github.com/AmrDeveloper/Sparkler">Sparkler</a> A Cross platform API request builder
-* <a href="https://github.com/GikuMironica/ExploreHub">ExploreHub</a> An event booking application
-* <a href="https://github.com/dubbadhar/gramophy">Gramophy</a> Ad-free, Opensource, YouTube Music Player/Downloader
-* [JabRef](https://www.jabref.org/) An opensource (scientific) Reference Manager, mostly used in the LaTeX world
-* <a href="https://github.com/greyovo/OnlyViewer">OnlyViewer</a> A pure picture viewer with some practical features
-* <a href="https://github.com/Patresss/AutomationBoot">Automation Boot</a> An application for process automation
-* <a href="https://github.com/DevTony101/JFXGithubClient">JFXGithubClient</a> A JavaFX Github desktop client
-* <a href="https://github.com/MJVL/UniObfuscator">UniObfuscator</a> A Java obfuscator
-* <a href="https://github.com/Propo41/ePatient">ePatient</a> A patient-management system
-* <a href="https://github.com/crschnick/pdx_unlimiter">Pdx-Unlimiter</a> A toolbox for Paradox Grand Strategy games
-* <a href="https://gitlab.com/grrfe/CassettePlayer">CassettePlayer</a> A fully featured JavaFX music player
+   1. 幻灯片的全屏播放、翻页
+   2. 设定画笔、插入图像、修改图像（使用橡皮擦）
+   3. 图形填充、线型设置
+   4. 对幻灯片页面上已有的基本图形、线性、文字进行修改
+   5. 操作的撤销与重组
+   6. 菜单
+   7. 其他
 
-# Build
-To build JFoenix, execute the following command:
+### 帮助文档
 
-    gradlew build
+   1. ##### 开发环境和插件选择：
 
-To run the main demo, execute the following command:
+      `Gradle + JavaFx + JPoneiX + JDK 1.8 + Spire.Presentation + IDEA 2020.3.3 (Ultimate Edition)`
 
-    gradlew run
+      说明：
 
-**NOTE** : You need to set JAVA_HOME environment variable to point to Java 1.8 directory.
-
-**NOTE** : JFoenix requires **Java 1.8u60** and above.
-
-# Demo
-For detailed steps on getting the demo running, see [the wiki].
-
-# How can I use JFoenix?
-You can download the source code of the library and build it as mentioned previously. Building JFoenix will generate jfoenix-0.0.0-SNAPSHOT.jar under the jfoenix/build/libs folder. To use JFoenix, import jfoenix-0.0.0-SNAPSHOT.jar into your project and start using the new material design Java components :).
-
-## Gradle
-### How to Include In Gradle Project
-```groovy
-repositories {
-    mavenCentral()
-}
-```
-Reference the repository from this location using:
-* Java 9+
-    ```groovy
-    dependencies {
-        compile 'com.jfoenix:jfoenix:9.0.10'
-    }
-    ```
-* Java 8
-    ```groovy
-    dependencies {
-        compile 'com.jfoenix:jfoenix:8.0.10'
-    }
-    ```
-
-## Maven
-### How to Include In Maven Project
-* Java 9+
-    ```xml
-    <dependency>
-        <groupId>com.jfoenix</groupId>
-        <artifactId>jfoenix</artifactId>
-        <version>9.0.10</version>
-    </dependency>
-    ```
-* Java 8
-    ```xml
-    <dependency>
-        <groupId>com.jfoenix</groupId>
-        <artifactId>jfoenix</artifactId>
-        <version>8.0.10</version>
-    </dependency>
-    ```
-# Components
-<details><summary><i>JFXButton </i><a href="https://github.com/jfoenixadmin/JFoenix/wiki/Button"><b>Usage</b></a></summary><p>
-
-![Button Demo](http://jfoenix.com/gif/button.gif "Button Demo")
-</p></details>
-
-<details><summary><i>JFXCheckBox </i><a href="https://github.com/jfoenixadmin/JFoenix/wiki/Checkbox"><b>Usage</b></a></summary><p>
-
-![Check Box Demo](http://jfoenix.com/gif/checkbox.gif "Check Box Demo")
-</p></details>
-
-<details><summary><i>JFXToggleButton </i><a href="https://github.com/jfoenixadmin/JFoenix/wiki/Toggle-Button"><b>Usage</b></a></summary><p>
-
-![Toggle Button Demo](http://jfoenix.com/gif/toggle-button.gif "Toggle Button Demo")
-</p></details>
-
-<details><summary><i>JFXDialog</i></summary><p>
+      1. 按照 `non-modular + idea` 使用 JavaFx，会带来配置修改问题
+      2. 使用 `JPoneiX` 开源项目优化 UI 界面，更加美观和方便
+      3. 使用`Gradle`管理项目更加方便，兼容性更好
 
 
-![Dialog Demo](http://jfoenix.com/gif/dialog.gif "Dialog Demo")
-</p></details>
+   2. ##### JavaFX的基本操作指南：
 
-<details><summary><i>JFXListView</i></summary><p>
+      1. 官方文档: <a>https://openjfx.io/</a>
+         * 基本内容以及示例说明
+         * JavaFX的doc文档说明 
+      2. WiKi教程: <a>https://iowiki.com/javafx/javafx_images.html</a>
+      3. JavaFX和FXML的关系阐述： <a>https://blog.csdn.net/theonegis/article/details/50181339</a>
 
-    
-![List View Demo](http://jfoenix.com/gif/listview.gif "List View Demo")
-</p></details>
+   3. ##### Java操作PPT的免费组件:
 
-<details><summary><i>JFXHighlighter</i></summary><p>
+      1. 官方网址：<a>冰蓝科技 e-iceblue ｜ 您的办公文档开发技术专家 ｜ C#/VB.Net Excel, Word, PowerPoint, PDF, Barcode 组件](https://www.e-iceblue.cn/)</a>
+      2. 说明：
+         1. 此组件目前没有免费开源，会带有水印，不过不影响整体的实现
+         2. 另外官方没有Gradle方式添加到工程，附上Gradle如何添加本地外包的方法：<a>[Gradle加载本地jar包_m1213642578的专栏-CSDN博客_gradle加载本地jar](https://blog.csdn.net/m1213642578/article/details/52763130?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.no_search_link&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-1.no_search_link)</a>
 
-    
-![Highlighter](http://jfoenix.com/gif/highlighter.gif "Highlighter")
-</p></details>
+   4. ##### JavaFX实现绘图功能的项目：
 
-<details><summary><i>JFXChipView</i></summary><p>
+      1. GitHub链接：<a>https://github.com/FlyuZ/FYDrawing-JAVAFX</a>
+      2. 可以参考实现方法，按照需求更改
 
-    
-![Chip View](http://jfoenix.com/gif/chipview.gif "Chip View")
-</p></details>
+   5. ##### JPoneiX开源项目：
 
-<details><summary><i>JFXNodesList</i></summary><p>
+      1. GitHub链接：https://github.com/sshahine/JFoenix
+      2. 此开源项目美化了JavaFx的组件UI，并且提供了许多便于使用和操作的组件
 
-    
-![Nodes List Demo](http://jfoenix.com/gif/nodes-list.gif "Nodes List Demo")
-</p></details>
-
-<details><summary><i>JFXMasonryPane</i></summary><p>
-
-    
-![Masonry Demo](http://jfoenix.com/gif/masonry.gif "Masonry Demo")
-</p></details>
-
-<details><summary><i>JFXSlider </i> <a href="https://github.com/jfoenixadmin/JFoenix/wiki/Slider"><b>Usage</b></a></summary><p>
-
-![Slider Demo](http://jfoenix.com/gif/slider.gif "Slider Demo")
-</p></details>
-
-<details><summary><i>JFXSpinner</i></summary><p>
-
-    
-![Spinner Demo](http://jfoenix.com/gif/spinner.gif "Spinner Demo")
-</p></details>
-
-<details><summary><i>JFXSnackbar</i></summary><p>
-
-    
-![Icons-Snackbar Demo](http://jfoenix.com/gif/icons-snackbar.gif "Icons-Snackbar Demo")
-</p></details>
-
-<details><summary><i>JFXColorPicker</i></summary><p>
-
-    
-![Color Picker Demo](http://jfoenix.com/gif/colorpicker-beta.gif "Color Picker Demo")
-</p></details>
-
-<details><summary><i>JFXDatePicker</i></summary><p>
-
-    
-![Date Picker Demo](http://jfoenix.com/gif/datepicker.gif "Date Picker Demo")
-</p></details>
-
-<details><summary><i>JFXTimePicker</i></summary><p>
-
-    
-![Time Picker Demo](http://jfoenix.com/gif/timepicker.gif "Time Picker Demo")
-</p></details>
-
-<details><summary><i>JFXTreeTableView</i></summary><p>
-
-    
-![Tree Table View](http://jfoenix.com/gif/treetableview.gif "Tree Table View")
-</p></details>
-
-<details><summary><i>Grouping</i></summary><p>
-    
-![Grouping Demo](http://jfoenix.com/gif/grouping.gif "Grouping Demo")
-</p></details>
-
-[mavenbadge]:https://search.maven.org/search?q=g:com.jfoenix%20AND%20a:jfoenix&core=gav
-[mavenbadge img]:https://maven-badges.herokuapp.com/maven-central/com.jfoenix/jfoenix/badge.svg
-
-[CircleCI]:https://circleci.com/gh/jfoenixadmin/JFoenix/tree/master
-[CircleCI img]:https://circleci.com/gh/jfoenixadmin/JFoenix/tree/master.svg?style=shield
-
-[gitter]:https://gitter.im/JFoenix/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-[gitter img]:https://badges.gitter.im/JFoenix/Lobby.svg
-
-[the wiki]: https://github.com/jfoenixadmin/JFoenix/wiki#trying-the-demo
-
-## Contributors
-
-This project exists thanks to all the people who contribute.
-
-<a href="https://github.com/jfoenixadmin/JFoenix/contributors"><img src="https://opencollective.com/JFoenix/contributors.svg?width=890&button=false" /></a>
-
-
-## Special Thanks
-
-Special thanks to <a href="https://www.jetbrains.com">JetBrains</a> and <a href="https://www.ej-technologies.com/products/jprofiler/overview.html">JProfiler</a> for their support to this project.
