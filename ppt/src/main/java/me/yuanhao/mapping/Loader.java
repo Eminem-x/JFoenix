@@ -32,12 +32,19 @@ public class Loader {
                     ImageView imageView = new ImageView();
                     Image image = SwingFXUtils.toFXImage(bufferedImage,null);
                     imageView.setImage(image);
-                    content.getChildren().add(imageView);
 
                     imageView.setX(pic.getLeft());
                     imageView.setY(pic.getTop());
                     imageView.setFitHeight(pic.getHeight());
                     imageView.setFitWidth(pic.getWidth());
+
+                    //drag simply that need to enhance
+                    imageView.setOnMouseDragged(event -> {
+                        imageView.setX(event.getX());
+                        imageView.setY(event.getY());
+                    });
+
+                    content.getChildren().add(imageView);
                 }
                 if(shape instanceof PictureShape)
                 {
