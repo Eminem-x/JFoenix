@@ -13,10 +13,15 @@ public class ShowController {
 
     @FXML
     private void show() {
-        if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 1) {
-            Platform.exit();
-        } else if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 0) {
-            System.out.println(123456);
+        if (toolbarPopupList.getSelectionModel().getSelectedIndex() == Function.ShowFromStart.ordinal()) {
+
+        } else if (toolbarPopupList.getSelectionModel().getSelectedIndex() == Function.ShowFromCurrent.ordinal()) {
+
         }
+    }
+
+    enum Function {
+        // for easy reading
+        ShowFromStart,ShowFromCurrent
     }
 }
