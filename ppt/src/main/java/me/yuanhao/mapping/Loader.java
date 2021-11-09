@@ -3,13 +3,11 @@ package me.yuanhao.mapping;
 import com.spire.presentation.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.stage.Screen;
 
 import java.awt.image.BufferedImage;
 
@@ -19,6 +17,11 @@ import java.awt.image.BufferedImage;
 public class Loader {
     private final Group content;
     private final Group sidePane;
+
+    public Loader() {
+        content = new Group();
+        sidePane = new Group();
+    }
 
     public Loader(String pptName) throws Exception{
         content = new Group();
@@ -91,6 +94,10 @@ public class Loader {
                 content.getChildren().add(imageView);
             }
         }
+    }
+
+    public void test() {
+        System.out.println("hello");
     }
 
     public Group getContent() {
