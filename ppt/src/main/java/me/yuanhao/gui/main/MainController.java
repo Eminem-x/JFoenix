@@ -87,10 +87,10 @@ public class MainController {
         loadController("/fxml/ui/popup/EditorPopup.fxml", "me.yuanhao.gui.main.topmenu.EditorController", editorBarPopup, editorBurger);
         loadController("/fxml/ui/popup/ShowPopup.fxml", "me.yuanhao.gui.main.topmenu.ShowController", showBarPopup, showBurger);
 
-        setDrawer("C:\\Users\\DELL\\Desktop\\新建 Microsoft PowerPoint 演示文稿.pptx");
+        setDrawer("D:\\java\\JFoenix\\ppt\\src\\main\\resources\\新建 Microsoft PowerPoint 演示文稿.pptx");
     }
 
-    public void setDrawer(String pptName) throws Exception{
+    private void setDrawer(String pptName) throws Exception{
         Board board = new Board();
         Loader loader = new Loader(pptName);
         Pane contentPane = new Pane(
