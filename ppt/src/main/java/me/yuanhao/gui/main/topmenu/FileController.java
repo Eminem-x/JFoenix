@@ -1,7 +1,6 @@
 package me.yuanhao.gui.main.topmenu;
 
 import com.jfoenix.controls.JFXListView;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 
@@ -19,7 +18,11 @@ public class FileController {
     private void file() throws Exception{
         int choice = toolbarPopupList.getSelectionModel().getSelectedIndex();
         if (choice == Function.NewFile.ordinal()) {
-
+            Class<?> aClass = Class.forName("me.yuanhao.gui.main.MainController");
+            Object o = aClass.newInstance();
+            Method method = aClass.getDeclaredMethod("setDrawer", String.class);
+            method.setAccessible(true);
+            method.invoke(o,"D:\\java\\JFoenix\\ppt\\src\\main\\resources\\新建 Microsoft PowerPoint 演示文稿.pptx");
         } else if (choice == Function.Save.ordinal()) {
 
         } else if (choice == Function.Open.ordinal()) {
@@ -30,7 +33,8 @@ public class FileController {
 
             Class<?> aClass = Class.forName("me.yuanhao.gui.main.MainController");
             Object o = aClass.newInstance();
-            Method method = aClass.getMethod("setDrawer", String.class);
+            Method method = aClass.getDeclaredMethod("setDrawer", String.class);
+            method.setAccessible(true);
             method.invoke(o,img.getAbsolutePath());
         } else if (choice == Function.SaveAs.ordinal()) {
             FileChooser fileChooser = new FileChooser();
