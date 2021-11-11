@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.lang.reflect.Method;
 
 /**
  * @author Yuanhao
@@ -15,7 +16,7 @@ public class FileController {
     private JFXListView<?> toolbarPopupList;
 
     @FXML
-    private void file() {
+    private void file() throws Exception{
         int choice = toolbarPopupList.getSelectionModel().getSelectedIndex();
         if (choice == Function.NewFile.ordinal()) {
 
@@ -23,9 +24,14 @@ public class FileController {
 
         } else if (choice == Function.Open.ordinal()) {
             FileChooser fileChooser = new FileChooser();
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PPT", "*.pptx"));
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PPT", "*.pptx","*.ppt"));
             fileChooser.setTitle("打开");
             File img = fileChooser.showOpenDialog(null);
+
+            Class<?> aClass = Class.forName("me.yuanhao.gui.main.MainController");
+            Object o = aClass.newInstance();
+            Method method = aClass.getMethod("setDrawer", String.class);
+            method.invoke(o,img.getAbsolutePath());
         } else if (choice == Function.SaveAs.ordinal()) {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PPT", "*.pptx"));
