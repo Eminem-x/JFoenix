@@ -34,7 +34,7 @@ public class MainController {
     private JFXHamburger titleBurger;
 
     @FXML
-    private JFXDrawer drawer;
+    public static JFXDrawer drawer;
 
     @FXML
     private StackPane optionsBurger;
@@ -87,16 +87,19 @@ public class MainController {
         loadController("/fxml/ui/popup/EditorPopup.fxml", "me.yuanhao.gui.main.topmenu.EditorController", editorBarPopup, editorBurger);
         loadController("/fxml/ui/popup/ShowPopup.fxml", "me.yuanhao.gui.main.topmenu.ShowController", showBarPopup, showBurger);
 
+        setDrawer("C:\\Users\\DELL\\Desktop\\新建 Microsoft PowerPoint 演示文稿.pptx");
+    }
 
+    public void setDrawer(String pptName) throws Exception{
         Board board = new Board();
-        Loader loader = new Loader("C:\\Users\\DELL\\Desktop\\新建 Microsoft PowerPoint 演示文稿.pptx");
+        Loader loader = new Loader(pptName);
         Pane contentPane = new Pane(
             board.getCanvas(),
             loader.getContent()
         );
-        Pane sidePane = new Pane(
-            loader.getSidePane()
-        );
+
+        JFXScrollPane sidePane = new JFXScrollPane();
+        sidePane.setContent(loader.getSidePane());
         drawer.setContent(contentPane);
         drawer.setSidePane(sidePane);
     }
@@ -123,7 +126,6 @@ public class MainController {
                     JFXPopup.PopupHPosition.LEFT,
                     -12,
                     15));
-
         }
         JFXTooltip.setVisibleDuration(Duration.millis(3000));
     }
