@@ -60,7 +60,6 @@ public class Loader {
                     setContent(slide);
                     iterator.reset();
                     while(iterator.hasNext() && !slide.equals((ISlide) iterator.next())) {
-                        System.out.println(123);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
