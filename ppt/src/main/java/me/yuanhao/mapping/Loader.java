@@ -59,8 +59,7 @@ public class Loader {
                 try {
                     setContent(slide);
                     iterator.reset();
-                    while(iterator.hasNext() && !slide.equals((ISlide) iterator.next())) {
-                    }
+                    while(iterator.hasNext() && !slide.equals((ISlide) iterator.next())) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -90,7 +89,6 @@ public class Loader {
                 imageView.setFitHeight(pic.getHeight());
                 imageView.setFitWidth(pic.getWidth());
 
-                //drag simply that need to enhance
                 imageView.setOnMouseDragged(event -> {
                     imageView.setX(event.getX());
                     imageView.setY(event.getY());
@@ -106,7 +104,6 @@ public class Loader {
                 imageView.setImage(image);
                 content.getChildren().add(imageView);
             }
-            //如何实现ppt整体布局居中 并且能够随着屏幕自动调节大小
         }
     }
 
