@@ -1,5 +1,6 @@
 package me.yuanhao.mapping;
 
+import com.spire.ms.System.Collections.IEnumerator;
 import com.spire.presentation.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
@@ -8,22 +9,24 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+
 import java.awt.image.BufferedImage;
 
 /**
  * @author Yuanhao
  */
 public class Loader {
-    private final Group content;
+    public static Group content = new Group();
+
     private final Group sidePane;
 
+    public static IEnumerator iterator;
+
     public Loader() {
-        content = new Group();
         sidePane = new Group();
     }
 
     public Loader(String pptName) throws Exception{
-        content = new Group();
         sidePane = new Group();
         setSidePane(pptName);
     }
@@ -35,9 +38,16 @@ public class Loader {
 
         Presentation ppt = new Presentation();
         ppt.loadFromFile(pptName);
-        setContent(pptName,ppt.getSlides().get(0));
+
+        iterator = ppt.getSlides().iterator();
+        if(iterator.hasNext()) {
+            setContent((ISlide) iterator.next());
+            iterator.reset();
+        }
+
         for (int i = 0; i < ppt.getSlides().getCount(); i++) {
             ISlide slide = ppt.getSlides().get(i);
+
             BufferedImage bufferedImage = slide.saveAsImage();
             ImageView imageView = new ImageView();
             Image image = SwingFXUtils.toFXImage(bufferedImage,null);
@@ -47,19 +57,23 @@ public class Loader {
             imageView.setCursor(Cursor.HAND);
             imageView.setOnMouseClicked(event -> {
                 try {
-                    setContent(pptName,slide);
+                    setContent(slide);
+                    iterator.reset();
+                    while(iterator.hasNext() && !slide.equals((ISlide) iterator.next())) {
+                        System.out.println(123);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
+
             vBox.getChildren().add(imageView);
         }
+
         sidePane.getChildren().add(vBox);
     }
 
-    private void setContent(String pptName, ISlide slide) throws Exception {
-        Presentation ppt = new Presentation();
-        ppt.loadFromFile(pptName);
+    private void setContent(ISlide slide) throws Exception {
         while(!content.getChildren().isEmpty()) {
             content.getChildren().remove(0);
         }
@@ -82,6 +96,7 @@ public class Loader {
                     imageView.setX(event.getX());
                     imageView.setY(event.getY());
                 });
+
                 content.getChildren().add(imageView);
             }
             if (shape instanceof PictureShape) {
@@ -92,6 +107,7 @@ public class Loader {
                 imageView.setImage(image);
                 content.getChildren().add(imageView);
             }
+            //如何实现ppt整体布局居中 并且能够随着屏幕自动调节大小
         }
     }
 
