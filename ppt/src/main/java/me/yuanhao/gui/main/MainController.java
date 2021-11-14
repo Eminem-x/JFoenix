@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import me.yuanhao.mapping.Loader;
 
@@ -27,6 +28,9 @@ public class MainController {
 
     @FXML
     private StackPane root;
+
+    @FXML
+    private VBox vBox;
 
     @FXML
     private StackPane titleBurgerContainer;
@@ -94,8 +98,8 @@ public class MainController {
         Board board = new Board();
         Loader loader = new Loader(pptName);
         Pane contentPane = new Pane(
-            board.getCanvas(),
-            loader.getContent()
+//            board.getCanvas(),
+            Loader.content
         );
 
         JFXScrollPane sidePane = new JFXScrollPane();
