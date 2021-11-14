@@ -9,7 +9,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import me.yuanhao.AppRun;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -42,7 +43,7 @@ public class Loader {
     private void setSidePane(String pptName) throws Exception {
         // ppt预览图垂直排列
         VBox vBox = new VBox();
-        vBox.setSpacing(20);
+        vBox.setSpacing(35);
         vBox.setPadding(new Insets(20));
 
         // 从指定文件中读取ppt
@@ -68,6 +69,10 @@ public class Loader {
             imageView.setFitHeight(200);
             imageView.setFitWidth(350);
 
+            // 为图片添加选取边界 border
+            BorderPane borderPane = new BorderPane(imageView);
+            setImageBorder(borderPane,imageView);
+
             // 选取图片时触发事件 将指定的页元素映射到content展示以及操作
             imageView.setOnMouseClicked(event -> {
                 try {
@@ -81,10 +86,8 @@ public class Loader {
                     e.printStackTrace();
                 }
             });
-
-            vBox.getChildren().add(imageView);
+            vBox.getChildren().add(borderPane);
         }
-
         sidePane.getChildren().add(vBox);
     }
 
@@ -193,6 +196,33 @@ public class Loader {
             double f = newValue.doubleValue() / oldValue.doubleValue();
             imageView.setFitWidth(f * imageView.getFitWidth());
             imageView.setLayoutY(f * imageView.getLayoutY());
+        });
+    }
+
+    private void setImageBorder(BorderPane borderPane,ImageView imageView) {
+        BorderStroke redBorderStroke = new BorderStroke(
+            Paint.valueOf("RED"),
+            BorderStrokeStyle.SOLID,
+            new CornerRadii(0),
+            new BorderWidths(4));
+
+        BorderStroke whiteBorderStroke = new BorderStroke(
+            Paint.valueOf("WHITE"),
+            BorderStrokeStyle.SOLID,
+            new CornerRadii(0),
+            new BorderWidths(4));
+
+        // 提前预设位置 防止动态添加时 布局抖动
+        borderPane.setBorder(new Border(whiteBorderStroke));
+
+        imageView.setOnMouseEntered(event -> {
+            Border border = new Border(redBorderStroke);
+            borderPane.setBorder(border);
+        });
+
+        imageView.setOnMouseExited(event -> {
+            Border border = new Border(whiteBorderStroke);
+            borderPane.setBorder(border);
         });
     }
 
