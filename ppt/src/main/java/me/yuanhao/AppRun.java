@@ -25,8 +25,12 @@ public class AppRun extends Application {
     @FXMLViewFlowContext
     private ViewFlowContext flowContext;
 
+    public static Stage stage;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
+
         new Thread(() -> {
             try {
                 SVGGlyphLoader.loadGlyphsFont(AppRun.class.getResourceAsStream("/fonts/icomoon.svg"),
