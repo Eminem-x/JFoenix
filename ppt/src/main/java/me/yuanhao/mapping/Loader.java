@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import me.yuanhao.AppRun;
 
 import java.awt.image.BufferedImage;
 
@@ -84,10 +85,13 @@ public class Loader {
                 Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                 imageView.setImage(image);
 
-                imageView.setX(pic.getLeft());
-                imageView.setY(pic.getTop());
-                imageView.setFitHeight(pic.getHeight());
-                imageView.setFitWidth(pic.getWidth());
+                //center
+                imageView.setLayoutX((pic.getLeft() / 0.7) + 48);
+                imageView.setLayoutY((pic.getTop() / 0.7) + 16);
+                imageView.setFitHeight(pic.getHeight() / 0.7);
+                imageView.setFitWidth(pic.getWidth() / 0.7);
+
+                setImageAuto(imageView);
 
                 imageView.setOnMouseDragged(event -> {
                     imageView.setX(event.getX());
@@ -109,6 +113,19 @@ public class Loader {
 
     public void test() {
         System.out.println("hello");
+    }
+
+    private void setImageAuto(ImageView imageView) {
+        AppRun.stage.heightProperty().addListener((observable, oldValue, newValue) -> {
+            double f = newValue.doubleValue() / oldValue.doubleValue();
+            imageView.setFitHeight(f * imageView.getFitHeight());
+            imageView.setLayoutX(f * imageView.getLayoutX());
+        });
+        AppRun.stage.widthProperty().addListener((observable, oldValue, newValue) -> {
+            double f = newValue.doubleValue() / oldValue.doubleValue();
+            imageView.setFitWidth(f * imageView.getFitWidth());
+            imageView.setLayoutY(f * imageView.getLayoutY());
+        });
     }
 
     public Group getContent() {
