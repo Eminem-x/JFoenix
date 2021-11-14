@@ -128,9 +128,13 @@ public class Loader {
         setImageAuto(imageView);
 
         // 拖动图片移动操作
-        imageView.setOnMouseDragged(event -> {
-            imageView.setX(event.getX());
-            imageView.setY(event.getY());
+        imageView.setOnMousePressed(event -> {
+            final double deltaX = event.getX() - imageView.getX();
+            final double deltaY = event.getY() - imageView.getY();
+            imageView.setOnMouseDragged(e -> {
+                imageView.setX(e.getX() - deltaX);
+                imageView.setY(e.getY() - deltaY);
+            });
         });
 
         content.getChildren().add(imageView);
