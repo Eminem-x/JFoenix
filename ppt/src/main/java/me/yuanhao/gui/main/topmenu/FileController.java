@@ -35,7 +35,9 @@ public class FileController {
             Object o = aClass.newInstance();
             Method method = aClass.getDeclaredMethod("setDrawer", String.class);
             method.setAccessible(true);
-            method.invoke(o,img.getAbsolutePath());
+            if(img != null) {
+                method.invoke(o,img.getAbsolutePath());
+            }
         } else if (choice == Function.SaveAs.ordinal()) {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PPT", "*.pptx"));
