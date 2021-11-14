@@ -6,7 +6,6 @@ import com.spire.ms.System.Collections.IEnumerator;
 import com.spire.presentation.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
-import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,20 +35,28 @@ public class Loader {
         setSidePane(pptName);
     }
 
+    /**
+     * set the drawer's sidePane which is the ppt' view
+     * @param pptName url of the ppt
+     */
     private void setSidePane(String pptName) throws Exception {
+        // ppt预览图垂直排列
         VBox vBox = new VBox();
         vBox.setSpacing(20);
         vBox.setPadding(new Insets(20));
 
+        // 从指定文件中读取ppt
         Presentation ppt = new Presentation();
         ppt.loadFromFile(pptName);
 
+        // 用迭代器操作ppt每一页 与此同时映射第一页
         iterator = ppt.getSlides().iterator();
         if (iterator.hasNext()) {
             setContent((ISlide) iterator.next());
             iterator.reset();
         }
 
+        // ppt的每一页以图片形式映射到预览图
         for (int i = 0; i < ppt.getSlides().getCount(); i++) {
             ISlide slide = ppt.getSlides().get(i);
 
@@ -57,12 +64,16 @@ public class Loader {
             ImageView imageView = new ImageView();
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
             imageView.setImage(image);
+
             imageView.setFitHeight(200);
             imageView.setFitWidth(350);
-            imageView.setCursor(Cursor.HAND);
+
+            // 选取图片时触发事件 将指定的页元素映射到content展示以及操作
             imageView.setOnMouseClicked(event -> {
                 try {
                     setContent(slide);
+
+                    // 更新迭代器的位置
                     iterator.reset();
                     while (iterator.hasNext() && !slide.equals((ISlide) iterator.next())) {
                     }
@@ -77,10 +88,17 @@ public class Loader {
         sidePane.getChildren().add(vBox);
     }
 
+    /**
+     * set the drawer's content which is the ppt show
+     * @param slide the specific slide
+     */
     private void setContent(ISlide slide) throws Exception {
+        // 清空先前的元素
         while (!content.getChildren().isEmpty()) {
             content.getChildren().remove(0);
         }
+
+        // 按照元素的不同形式进行不同的映射操作
         for (int j = 0; j < slide.getShapes().getCount(); j++) {
             IShape shape = slide.getShapes().get(j);
             if (shape instanceof SlidePicture) {
@@ -100,14 +118,16 @@ public class Loader {
         Image image = SwingFXUtils.toFXImage(bufferedImage, null);
         imageView.setImage(image);
 
-        //center
+        // 使图片处于布局中心位置
         imageView.setLayoutX((pic.getLeft() / 0.7) + 48);
         imageView.setLayoutY((pic.getTop() / 0.7) + 16);
         imageView.setFitHeight(pic.getHeight() / 0.7);
         imageView.setFitWidth(pic.getWidth() / 0.7);
 
+        // 使图片随着界面大小等比变化
         setImageAuto(imageView);
 
+        // 拖动图片移动操作
         imageView.setOnMouseDragged(event -> {
             imageView.setX(event.getX());
             imageView.setY(event.getY());
