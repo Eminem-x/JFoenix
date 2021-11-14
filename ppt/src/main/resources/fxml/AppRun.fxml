@@ -9,7 +9,7 @@
            xmlns="http://javafx.com/javafx/2.2">
     <BorderPane>
         <top>
-            <VBox spacing="20">
+            <VBox fx:id="vBox" spacing="20">
                 <JFXToolbar>
                     <leftItems>
                         <JFXRippler maskType="CIRCLE" style="-fx-ripple-color:WHITE;">
@@ -67,7 +67,7 @@
 
         <!-- Content Area -->
         <center>
-            <JFXDrawer fx:id="drawer" defaultDrawerSize="400" direction="LEFT">
+            <JFXDrawer fx:id="drawer" defaultDrawerSize="415" direction="LEFT">
                 <styleClass>
                     <String fx:value="body"/>
                 </styleClass>
