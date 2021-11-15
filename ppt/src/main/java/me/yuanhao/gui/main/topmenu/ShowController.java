@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import me.yuanhao.AppRun;
 import me.yuanhao.gui.main.MainController;
 import me.yuanhao.mapping.Loader;
+
 import java.lang.reflect.Method;
 
 /**
@@ -21,11 +22,13 @@ public class ShowController {
     private void show() {
         if (toolbarPopupList.getSelectionModel().getSelectedIndex() == Function.ShowFromStart.ordinal()) {
             AppRun.stage.setFullScreen(true);
+
+            // ppt重置至初始第一页
             Loader.iterator.reset();
             scrollAction(-1);
 
             MainController.drawer.setOnScroll(event -> {
-                if(AppRun.stage.isFullScreen()) {
+                if (AppRun.stage.isFullScreen()) {
                     scrollAction(event.getDeltaY());
                 }
             });
@@ -39,7 +42,7 @@ public class ShowController {
                     Method method = aClass.getDeclaredMethod("setContent", ISlide.class);
                     method.setAccessible(true);
                     if (Loader.iterator.hasNext()) {
-                        method.invoke(o,(ISlide) Loader.iterator.next());
+                        method.invoke(o, (ISlide) Loader.iterator.next());
                         index++;
                     }
                 } catch (Exception e) {
@@ -50,16 +53,16 @@ public class ShowController {
     }
 
     private void scrollAction(double type) {
-        if(type > 0) {
+        if (type > 0) {
             //向上回滚
-        } else if(type < 0) {
+        } else if (type < 0) {
             try {
                 Class<?> aClass = Class.forName("me.yuanhao.mapping.Loader");
                 Object o = aClass.newInstance();
                 Method method = aClass.getDeclaredMethod("setContent", ISlide.class);
                 method.setAccessible(true);
                 if (Loader.iterator.hasNext()) {
-                    method.invoke(o,(ISlide) Loader.iterator.next());
+                    method.invoke(o, (ISlide) Loader.iterator.next());
                     index++;
                 }
             } catch (Exception e) {
