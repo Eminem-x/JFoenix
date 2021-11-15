@@ -20,7 +20,7 @@ public class FileController {
     }
 
     @FXML
-    private void file() throws Exception{
+    private void file() throws Exception {
         int choice = toolbarPopupList.getSelectionModel().getSelectedIndex();
 
         if (choice == Function.NewFile.ordinal()) {
@@ -37,26 +37,26 @@ public class FileController {
     @FXML
     private void judge() {
         // disable at showing stage
-        AppRun.stage.heightProperty().addListener(observable -> {
+        AppRun.stage.fullScreenProperty().addListener(observable -> {
             toolbarPopupList.setDisable(AppRun.stage.isFullScreen());
         });
     }
 
-    private void newFile() throws Exception{
+    private void newFile() throws Exception {
         Class<?> aClass = Class.forName("me.yuanhao.gui.main.MainController");
         Object o = aClass.newInstance();
         Method method = aClass.getDeclaredMethod("setDrawer", String.class);
         method.setAccessible(true);
-        method.invoke(o,"D:\\java\\JFoenix\\ppt\\src\\main\\resources\\新建 Microsoft PowerPoint 演示文稿.pptx");
+        method.invoke(o, "D:\\java\\JFoenix\\ppt\\src\\main\\resources\\新建 Microsoft PowerPoint 演示文稿.pptx");
     }
 
     private void saveFile() {
 
     }
 
-    private void openFile() throws Exception{
+    private void openFile() throws Exception {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PPT", "*.pptx","*.ppt"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PPT", "*.pptx", "*.ppt"));
         fileChooser.setTitle("打开");
         File img = fileChooser.showOpenDialog(null);
 
@@ -64,8 +64,8 @@ public class FileController {
         Object o = aClass.newInstance();
         Method method = aClass.getDeclaredMethod("setDrawer", String.class);
         method.setAccessible(true);
-        if(img != null) {
-            method.invoke(o,img.getAbsolutePath());
+        if (img != null) {
+            method.invoke(o, img.getAbsolutePath());
         }
     }
 
@@ -78,6 +78,6 @@ public class FileController {
 
     enum Function {
         // for easy reading
-        NewFile,Save,Open,SaveAs
+        NewFile, Save, Open, SaveAs
     }
 }
