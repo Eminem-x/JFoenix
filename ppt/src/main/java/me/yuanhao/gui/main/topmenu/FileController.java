@@ -3,6 +3,7 @@ package me.yuanhao.gui.main.topmenu;
 import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
+import me.yuanhao.AppRun;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -13,6 +14,10 @@ import java.lang.reflect.Method;
 public class FileController {
     @FXML
     private JFXListView<?> toolbarPopupList;
+
+    public FileController() {
+        judge();
+    }
 
     @FXML
     private void file() throws Exception{
@@ -27,6 +32,14 @@ public class FileController {
         } else if (choice == Function.SaveAs.ordinal()) {
             saveAsFile();
         }
+    }
+
+    @FXML
+    private void judge() {
+        // disable at showing stage
+        AppRun.stage.heightProperty().addListener(observable -> {
+            toolbarPopupList.setDisable(AppRun.stage.isFullScreen());
+        });
     }
 
     private void newFile() throws Exception{
