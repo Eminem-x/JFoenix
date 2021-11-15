@@ -32,8 +32,8 @@ public class EditorController {
             toolbarPopupList.setDisable(!AppRun.stage.isFullScreen());
         }
 
-        // able at showing stage
-        AppRun.stage.heightProperty().addListener(observable -> {
+        // disable at start
+        AppRun.stage.fullScreenProperty().addListener(observable -> {
             toolbarPopupList.setDisable(!AppRun.stage.isFullScreen());
         });
     }
