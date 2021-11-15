@@ -3,10 +3,9 @@ package fxDrawing.stage;
 import javafx.scene.paint.Color;
 
 /**
- * @see Shape
  * 当前图形类，纪录当前图形需要的属性
- * @version 1.0
- * @author Flyuz
+ *
+ * @author Yuanhao
  */
 public class Shape {
     static String toolName = "PEN";
@@ -15,22 +14,28 @@ public class Shape {
     static int fontSize = 12;
     static String fontFamily = "AIGDT";
     static Color color = Color.BLACK;
-    static void resetToolName(String name){
+
+    static void resetToolName(String name) {
         Shape.toolName = name;
     }
-    static void resetLineSize(String size){
+
+    static void resetLineSize(String size) {
         Shape.lineSize = size;
     }
-    static void resetRubberSize(int size){
+
+    static void resetRubberSize(int size) {
         Shape.rubberSize = size;
     }
-    static void resetFontSize(int size){
+
+    static void resetFontSize(int size) {
         Shape.fontSize = size;
     }
-    static void resetFontFamily(String font){
+
+    static void resetFontFamily(String font) {
         Shape.fontFamily = font;
     }
-    static void resetColor(Color c){
+
+    static void resetColor(Color c) {
         Shape.color = c;
     }
 }
