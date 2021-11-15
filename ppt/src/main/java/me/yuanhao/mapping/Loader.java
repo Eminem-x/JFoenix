@@ -1,9 +1,17 @@
 package me.yuanhao.mapping;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXColorPicker;
+import com.jfoenix.controls.JFXNodesList;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.spire.ms.System.Collections.IEnumerator;
 import com.spire.presentation.*;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.paint.Color;
+import me.yuanhao.draw.stage.Board;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -12,9 +20,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import me.yuanhao.AppRun;
+import me.yuanhao.draw.stage.Shape;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -22,10 +32,13 @@ import java.awt.image.BufferedImage;
  */
 public class Loader {
     public static Group content = new Group();
-
     private final Group sidePane;
-
     public static IEnumerator iterator;
+
+    private static final String FX_TEXT_FILL_WHITE = "-fx-text-fill:RED";
+    private static final String ANIMATED_OPTION_BUTTON = "animated-option-button";
+    private static final String ANIMATED_OPTION_SUB_BUTTON = "animated-option-sub-button";
+    private static final String ANIMATED_OPTION_SUB_BUTTON2 = "animated-option-sub-button2";
 
     public Loader() {
         sidePane = new Group();
@@ -101,15 +114,26 @@ public class Loader {
             content.getChildren().remove(0);
         }
 
-        // 按照元素的不同形式进行不同的映射操作
-        for (int j = 0; j < slide.getShapes().getCount(); j++) {
-            IShape shape = slide.getShapes().get(j);
-            if (shape instanceof SlidePicture) {
-                setSidePicture(shape);
-            } else if (shape instanceof PictureShape) {
-                setPictureShape(shape);
-            } else if (shape instanceof IAutoShape) {
-                setIAutoShape(shape);
+        // 放映模式的时候添加画图功能 但是图片失真
+        if(AppRun.stage.isFullScreen()) {
+            slide.saveAsImage(1,2);
+            BufferedImage bufferedImage = slide.saveAsImage();
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            Board board = new Board(image);
+            content.getChildren().add(board.getCanvas());
+
+            setNodesList();
+        } else {
+            // 按照元素的不同形式进行不同的映射操作
+            for (int j = 0; j < slide.getShapes().getCount(); j++) {
+                IShape shape = slide.getShapes().get(j);
+                if (shape instanceof SlidePicture) {
+                    setSidePicture(shape);
+                } else if (shape instanceof PictureShape) {
+                    setPictureShape(shape);
+                } else if (shape instanceof IAutoShape) {
+                    setIAutoShape(shape);
+                }
             }
         }
     }
@@ -121,14 +145,14 @@ public class Loader {
         Image image = SwingFXUtils.toFXImage(bufferedImage, null);
         imageView.setImage(image);
 
-        // 使图片处于布局中心位置
+        // 使图片随着界面大小等比变化
+        setImageAuto(imageView);
+
+        // 使图片初始处于布局中心位置
         imageView.setLayoutX((pic.getLeft() / 0.7) + 48);
         imageView.setLayoutY((pic.getTop() / 0.7) + 16);
         imageView.setFitHeight(pic.getHeight() / 0.7);
         imageView.setFitWidth(pic.getWidth() / 0.7);
-
-        // 使图片随着界面大小等比变化
-        setImageAuto(imageView);
 
         // 拖动图片移动操作
         imageView.setOnMousePressed(event -> {
@@ -224,6 +248,48 @@ public class Loader {
             Border border = new Border(whiteBorderStroke);
             borderPane.setBorder(border);
         });
+    }
+
+    private void setNodesList() {
+        JFXButton button1 = new JFXButton();
+        javafx.scene.control.Label sslabel = new Label("R1");
+        sslabel.setStyle(FX_TEXT_FILL_WHITE);
+        button1.setGraphic(sslabel);
+        button1.setButtonType(JFXButton.ButtonType.RAISED);
+        button1.getStyleClass().addAll(ANIMATED_OPTION_BUTTON, ANIMATED_OPTION_SUB_BUTTON2);
+
+        JFXButton button2 = new JFXButton("R2");
+        button2.setTooltip(new Tooltip("Button R2"));
+        button2.setButtonType(JFXButton.ButtonType.RAISED);
+        button2.getStyleClass().addAll(ANIMATED_OPTION_BUTTON, ANIMATED_OPTION_SUB_BUTTON2);
+
+        JFXButton button3 = new JFXButton("R3");
+        button3.setButtonType(JFXButton.ButtonType.RAISED);
+        button3.getStyleClass().addAll(ANIMATED_OPTION_BUTTON, ANIMATED_OPTION_SUB_BUTTON2);
+
+        JFXNodesList nodesList = new JFXNodesList();
+        nodesList.setRotate(90);
+        nodesList.setSpacing(20);
+        nodesList.addAnimatedNode(button2);
+
+        JFXColorPicker colorPicker = new JFXColorPicker(Color.BLACK);
+        colorPicker.getStyleClass().add("button");
+        nodesList.addAnimatedNode(colorPicker);
+        colorPicker.valueProperty().addListener(observable -> {
+            Shape.color = colorPicker.getValue();
+        });
+
+        JFXNodesList nodesList3 = new JFXNodesList();
+        nodesList3.setSpacing(10);
+        nodesList3.setRotate(180);
+        // init nodes
+        nodesList3.addAnimatedNode(button1);
+        nodesList3.addAnimatedNode(nodesList);
+        nodesList3.addAnimatedNode(button3);
+        nodesList3.setLayoutX(800);
+        nodesList3.setLayoutY(800);
+
+        content.getChildren().add(nodesList3);
     }
 
     public Group getContent() {
