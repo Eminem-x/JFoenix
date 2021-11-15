@@ -28,7 +28,7 @@ public class EditorController {
     @FXML
     private void judge() {
         // disable at start
-        if(toolbarPopupList != null) {
+        if (toolbarPopupList != null) {
             toolbarPopupList.setDisable(!AppRun.stage.isFullScreen());
         }
 
