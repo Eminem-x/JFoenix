@@ -46,7 +46,8 @@ public class AppRun extends Application {
         flowContext.register("Stage", primaryStage);
         flow.createHandler(flowContext).start(container);
 
-        JFXDecorator decorator = new JFXDecorator(primaryStage, container.getView());
+        // 不设置全屏button 将此显示做为放映模式
+        JFXDecorator decorator = new JFXDecorator(primaryStage, container.getView(), false, true, true);
         decorator.setCustomMaximize(true);
         decorator.setGraphic(new SVGGlyph(""));
 
@@ -68,6 +69,7 @@ public class AppRun extends Application {
             JFoenixResources.load("css/jfoenix-design.css").toExternalForm(),
             AppRun.class.getResource("/css/jfoenix-main-demo.css").toExternalForm());
         primaryStage.setScene(scene);
+
         primaryStage.show();
     }
 
