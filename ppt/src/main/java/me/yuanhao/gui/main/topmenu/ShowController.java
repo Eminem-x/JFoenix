@@ -36,7 +36,7 @@ public class ShowController {
     @FXML
     private void judge() {
         // disable at showing stage
-        AppRun.stage.heightProperty().addListener(observable -> {
+        AppRun.stage.fullScreenProperty().addListener(observable -> {
             toolbarPopupList.setDisable(AppRun.stage.isFullScreen());
         });
     }
