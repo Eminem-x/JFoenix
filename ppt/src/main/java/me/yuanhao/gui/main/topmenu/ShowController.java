@@ -18,38 +18,60 @@ public class ShowController {
 
     private int index = 0;
 
+    public ShowController() {
+        judge();
+    }
+
     @FXML
     private void show() {
-        if (toolbarPopupList.getSelectionModel().getSelectedIndex() == Function.ShowFromStart.ordinal()) {
-            AppRun.stage.setFullScreen(true);
+        int choice = toolbarPopupList.getSelectionModel().getSelectedIndex();
 
-            // ppt重置至初始第一页
-            Loader.iterator.reset();
-            scrollAction(-1);
-
-            MainController.drawer.setOnScroll(event -> {
-                if (AppRun.stage.isFullScreen()) {
-                    scrollAction(event.getDeltaY());
-                }
-            });
-        } else if (toolbarPopupList.getSelectionModel().getSelectedIndex() == Function.ShowFromCurrent.ordinal()) {
-            AppRun.stage.setFullScreen(true);
-
-            MainController.drawer.setOnScroll(event -> {
-                try {
-                    Class<?> aClass = Class.forName("me.yuanhao.mapping.Loader");
-                    Object o = aClass.newInstance();
-                    Method method = aClass.getDeclaredMethod("setContent", ISlide.class);
-                    method.setAccessible(true);
-                    if (Loader.iterator.hasNext()) {
-                        method.invoke(o, (ISlide) Loader.iterator.next());
-                        index++;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
+        if (choice == Function.ShowFromStart.ordinal()) {
+            showFromStart();
+        } else if (choice == Function.ShowFromCurrent.ordinal()) {
+            showFromCurrent();
         }
+    }
+
+    @FXML
+    private void judge() {
+        // disable at showing stage
+        AppRun.stage.heightProperty().addListener(observable -> {
+            toolbarPopupList.setDisable(AppRun.stage.isFullScreen());
+        });
+    }
+
+    private void showFromStart() {
+        AppRun.stage.setFullScreen(true);
+
+        // ppt重置至初始第一页
+        Loader.iterator.reset();
+        scrollAction(-1);
+
+        MainController.drawer.setOnScroll(event -> {
+            if (AppRun.stage.isFullScreen()) {
+                scrollAction(event.getDeltaY());
+            }
+        });
+    }
+
+    private void showFromCurrent() {
+        AppRun.stage.setFullScreen(true);
+
+        MainController.drawer.setOnScroll(event -> {
+            try {
+                Class<?> aClass = Class.forName("me.yuanhao.mapping.Loader");
+                Object o = aClass.newInstance();
+                Method method = aClass.getDeclaredMethod("setContent", ISlide.class);
+                method.setAccessible(true);
+                if (Loader.iterator.hasNext()) {
+                    method.invoke(o, (ISlide) Loader.iterator.next());
+                    index++;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void scrollAction(double type) {
