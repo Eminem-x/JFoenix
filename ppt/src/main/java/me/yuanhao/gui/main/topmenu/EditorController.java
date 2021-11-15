@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXListView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import me.yuanhao.AppRun;
+import me.yuanhao.draw.stage.Shape;
 
 /**
  * @author Yuanhao
@@ -18,10 +19,12 @@ public class EditorController {
 
     @FXML
     private void edit() {
-        if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 1) {
-            Platform.exit();
-        } else if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 0) {
-            System.out.println(123456);
+        int choice = toolbarPopupList.getSelectionModel().getSelectedIndex();
+
+        if (choice == Function.Draw.ordinal()) {
+            Shape.toolName = "PEN";
+        } else if (choice == Function.Eraser.ordinal()) {
+            Shape.toolName = "ERASER";
         }
     }
 
@@ -36,5 +39,10 @@ public class EditorController {
         AppRun.stage.fullScreenProperty().addListener(observable -> {
             toolbarPopupList.setDisable(!AppRun.stage.isFullScreen());
         });
+    }
+
+    enum Function {
+        // for easy reading
+        Draw, Eraser
     }
 }
