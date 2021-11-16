@@ -18,6 +18,7 @@ import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * @author Yuanhao
@@ -25,7 +26,8 @@ import java.awt.image.BufferedImage;
 public class Loader {
     public static Group content = new Group();
     private final Group sidePane;
-    public static IEnumerator iterator;
+    public static ArrayList<ISlide> slideList;
+    public static int slideIndex;
 
     public Loader() {
         sidePane = new Group();
@@ -33,6 +35,8 @@ public class Loader {
 
     public Loader(String pptName) throws Exception {
         sidePane = new Group();
+        slideIndex = 0;
+        slideList = new ArrayList<>();
         setSidePane(pptName);
     }
 
@@ -51,12 +55,25 @@ public class Loader {
         Presentation ppt = new Presentation();
         ppt.loadFromFile(pptName);
 
-        // 用迭代器操作ppt每一页 与此同时映射第一页
-        iterator = ppt.getSlides().iterator();
-        if (iterator.hasNext()) {
-            setContent((ISlide) iterator.next());
-            iterator.reset();
+        // 用表操作ppt每一页 与此同时映射第一页
+        for (int i = 0; i < ppt.getSlides().getCount(); i++) {
+            slideList.add(ppt.getSlides().get(i));
         }
+        setContent((ISlide) slideList.get(0));
+
+//        // 当退出幻灯片放映时 重返至第一页
+//        AppRun.stage.fullScreenProperty().addListener(observable -> {
+//            if(!AppRun.stage.isFullScreen()) {
+//                if (iterator.hasNext()) {
+//                    try {
+//                        setContent((ISlide) iterator.next());
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                    iterator.reset();
+//                }
+//            }
+//        });
 
         // ppt的每一页以图片形式映射到预览图
         for (int i = 0; i < ppt.getSlides().getCount(); i++) {
@@ -78,10 +95,12 @@ public class Loader {
             imageView.setOnMouseClicked(event -> {
                 try {
                     setContent(slide);
-
-                    // 更新迭代器的位置
-                    iterator.reset();
-                    while (iterator.hasNext() && !slide.equals((ISlide) iterator.next())) {
+                    // 更新表的记录位置
+                    for (int j = 0; j < slideList.size(); j++) {
+                        if (slideList.get(j).equals(slide)) {
+                            slideIndex = j;
+                            break;
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -105,12 +124,11 @@ public class Loader {
 
         // 放映模式的时候添加画图功能 但是图片失真
         if (AppRun.stage.isFullScreen()) {
-            slide.saveAsImage(1, 2);
+            slide.saveAsImage();
             BufferedImage bufferedImage = slide.saveAsImage();
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
             Board board = new Board(image);
             content.getChildren().add(board.getCanvas());
-
             setNodesList();
         } else {
             // 按照元素的不同形式进行不同的映射操作
