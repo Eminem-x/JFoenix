@@ -6,7 +6,9 @@ package me.yuanhao.draw.common;
  * @author Yuanhao
  */
 public class Size {
-    //画布大小
+    /**
+     * 画布大小
+     */
     public static final double CANVAS_WIDTH = 1920;
     public static final double CANVAS_HEIGHT = 1080;
 }
