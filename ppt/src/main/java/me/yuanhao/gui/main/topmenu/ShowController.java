@@ -16,8 +16,6 @@ public class ShowController {
     @FXML
     private JFXListView<?> toolbarPopupList;
 
-    private int index = 0;
-
     public ShowController() {
         judge();
     }
@@ -45,7 +43,7 @@ public class ShowController {
         AppRun.stage.setFullScreen(true);
 
         // ppt重置至初始第一页
-        Loader.iterator.reset();
+        Loader.slideIndex = -1;
         scrollAction(-1);
 
         MainController.drawer.setOnScroll(event -> {
@@ -59,6 +57,7 @@ public class ShowController {
         AppRun.stage.setFullScreen(true);
 
         scrollAction(-1);
+        scrollAction(1);
 
         MainController.drawer.setOnScroll(event -> {
             if (AppRun.stage.isFullScreen()) {
@@ -69,16 +68,29 @@ public class ShowController {
 
     private void scrollAction(double type) {
         if (type > 0) {
-            //向上回滚
-        } else if (type < 0) {
+            // 向上回滚
             try {
                 Class<?> aClass = Class.forName("me.yuanhao.mapping.Loader");
                 Object o = aClass.newInstance();
                 Method method = aClass.getDeclaredMethod("setContent", ISlide.class);
                 method.setAccessible(true);
-                if (Loader.iterator.hasNext()) {
-                    method.invoke(o, (ISlide) Loader.iterator.next());
-                    index++;
+
+                // 至少第二页ppt时才回滚
+                if (Loader.slideIndex != 0) {
+                    method.invoke(o, (ISlide) Loader.slideList.get(--Loader.slideIndex));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (type < 0) {
+            // 向下放映
+            try {
+                Class<?> aClass = Class.forName("me.yuanhao.mapping.Loader");
+                Object o = aClass.newInstance();
+                Method method = aClass.getDeclaredMethod("setContent", ISlide.class);
+                method.setAccessible(true);
+                if (Loader.slideIndex < Loader.slideList.size() - 1) {
+                    method.invoke(o, (ISlide) Loader.slideList.get(++Loader.slideIndex));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
