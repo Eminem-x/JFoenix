@@ -1,14 +1,10 @@
 package me.yuanhao.mapping;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXColorPicker;
-import com.jfoenix.controls.JFXNodesList;
-import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.spire.ms.System.Collections.IEnumerator;
 import com.spire.presentation.*;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.paint.Color;
+import me.yuanhao.components.EditorNodesList;
 import me.yuanhao.draw.stage.Board;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
@@ -18,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import me.yuanhao.AppRun;
-import me.yuanhao.draw.stage.Shape;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -245,77 +240,8 @@ public class Loader {
     }
 
     private void setNodesList() {
-        // 主结点
-        JFXButton plusButton = new JFXButton();
-        plusButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        plusButton.getStyleClass().add("main-button-nodesList");
-        FontIcon fontIcon1 = new FontIcon();
-        fontIcon1.setIconLiteral("fas-plus");
-        fontIcon1.setIconSize(24);
-        fontIcon1.getStyleClass().add("main-icon-nodesList");
-        plusButton.setGraphic(fontIcon1);
-
-        // 笔尖大小结点
-        JFXButton sizeButton = new JFXButton();
-        sizeButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        sizeButton.getStyleClass().add("animated-option-button-nodesList");
-        FontIcon fontIcon2 = new FontIcon();
-        fontIcon2.setIconLiteral("fas-font");
-        fontIcon2.setIconSize(24);
-        fontIcon2.getStyleClass().add("sub-icon-nodesList");
-        sizeButton.setGraphic(fontIcon2);
-
-        // 颜色选择结点
-        JFXButton colorButton = new JFXButton("Color");
-        colorButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        colorButton.getStyleClass().add("animated-option-button-nodesList");
-        FontIcon fontIcon3 = new FontIcon();
-        fontIcon3.setIconLiteral("fas-paint-brush");
-        fontIcon3.setIconSize(24);
-        fontIcon3.getStyleClass().add("sub-icon-nodesList");
-        colorButton.setGraphic(fontIcon3);
-
-        // 颜色选择器
-        JFXColorPicker colorPicker = new JFXColorPicker(Color.BLACK);
-        colorPicker.getStyleClass().add("button");
-        colorPicker.valueProperty().addListener(observable -> {
-            Shape.color = colorPicker.getValue();
-        });
-
-        // 封装颜色选择结点和颜色选择器
-        JFXNodesList colorNodesList = new JFXNodesList();
-//        colorNodesList.setRotate(90);
-        colorNodesList.setSpacing(10);
-        colorNodesList.addAnimatedNode(colorButton);
-        colorNodesList.addAnimatedNode(colorPicker);
-
-        // 形状选择结点
-        JFXButton shapeButton = new JFXButton("Shape");
-        shapeButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-        shapeButton.getStyleClass().add("animated-option-button-nodesList");
-        FontIcon fontIcon4 = new FontIcon();
-        fontIcon4.setIconLiteral("fas-circle");
-        fontIcon4.setIconSize(24);
-        fontIcon4.getStyleClass().add("sub-icon-nodesList");
-        shapeButton.setGraphic(fontIcon4);
-
-        // 封装主结点
-        JFXNodesList nodesList = new JFXNodesList();
-        nodesList.setSpacing(10);
-        nodesList.setRotate(270);
-        nodesList.addAnimatedNode(plusButton);
-        nodesList.addAnimatedNode(sizeButton);
-        nodesList.addAnimatedNode(colorNodesList);
-        nodesList.addAnimatedNode(shapeButton);
-        nodesList.setLayoutX(0);
-//        nodesList.setTranslateX(500);
-        nodesList.setLayoutY(0);
-//        nodesList.setTranslateY(-62);
-
-        AppRun.stage.fullScreenProperty().addListener(observable -> {
-            nodesList.setVisible(AppRun.stage.isFullScreen());
-        });
-        content.getChildren().add(nodesList);
+        EditorNodesList editorNodesList = new EditorNodesList();
+        content.getChildren().add(editorNodesList.getJfxNodesList());
     }
 
     public Group getContent() {
