@@ -7,9 +7,7 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.spire.ms.System.Collections.IEnumerator;
 import com.spire.presentation.*;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.paint.Color;
 import me.yuanhao.draw.stage.Board;
 import javafx.embed.swing.SwingFXUtils;
@@ -24,7 +22,6 @@ import me.yuanhao.draw.stage.Shape;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 import org.kordamp.ikonli.javafx.FontIcon;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -34,11 +31,6 @@ public class Loader {
     public static Group content = new Group();
     private final Group sidePane;
     public static IEnumerator iterator;
-
-    private static final String FX_TEXT_FILL_WHITE = "-fx-text-fill:RED";
-    private static final String ANIMATED_OPTION_BUTTON = "animated-option-button";
-    private static final String ANIMATED_OPTION_SUB_BUTTON = "animated-option-sub-button";
-    private static final String ANIMATED_OPTION_SUB_BUTTON2 = "animated-option-sub-button2";
 
     public Loader() {
         sidePane = new Group();
@@ -51,6 +43,7 @@ public class Loader {
 
     /**
      * set the drawer's sidePane which is the ppt' view
+     *
      * @param pptName url of the ppt
      */
     private void setSidePane(String pptName) throws Exception {
@@ -84,7 +77,7 @@ public class Loader {
 
             // 为图片添加选取边界 border
             BorderPane borderPane = new BorderPane(imageView);
-            setImageBorder(borderPane,imageView);
+            setImageBorder(borderPane, imageView);
 
             // 选取图片时触发事件 将指定的页元素映射到content展示以及操作
             imageView.setOnMouseClicked(event -> {
@@ -106,6 +99,7 @@ public class Loader {
 
     /**
      * set the drawer's content which is the ppt show
+     *
      * @param slide the specific slide
      */
     private void setContent(ISlide slide) throws Exception {
@@ -115,8 +109,8 @@ public class Loader {
         }
 
         // 放映模式的时候添加画图功能 但是图片失真
-        if(AppRun.stage.isFullScreen()) {
-            slide.saveAsImage(1,2);
+        if (AppRun.stage.isFullScreen()) {
+            slide.saveAsImage(1, 2);
             BufferedImage bufferedImage = slide.saveAsImage();
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
             Board board = new Board(image);
@@ -223,7 +217,7 @@ public class Loader {
         });
     }
 
-    private void setImageBorder(BorderPane borderPane,ImageView imageView) {
+    private void setImageBorder(BorderPane borderPane, ImageView imageView) {
         BorderStroke redBorderStroke = new BorderStroke(
             Paint.valueOf("RED"),
             BorderStrokeStyle.SOLID,
@@ -251,45 +245,77 @@ public class Loader {
     }
 
     private void setNodesList() {
-        JFXButton button1 = new JFXButton();
-        javafx.scene.control.Label sslabel = new Label("R1");
-        sslabel.setStyle(FX_TEXT_FILL_WHITE);
-        button1.setGraphic(sslabel);
-        button1.setButtonType(JFXButton.ButtonType.RAISED);
-        button1.getStyleClass().addAll(ANIMATED_OPTION_BUTTON, ANIMATED_OPTION_SUB_BUTTON2);
+        // 主结点
+        JFXButton plusButton = new JFXButton();
+        plusButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        plusButton.getStyleClass().add("main-button-nodesList");
+        FontIcon fontIcon1 = new FontIcon();
+        fontIcon1.setIconLiteral("fas-plus");
+        fontIcon1.setIconSize(24);
+        fontIcon1.getStyleClass().add("main-icon-nodesList");
+        plusButton.setGraphic(fontIcon1);
 
-        JFXButton button2 = new JFXButton("R2");
-        button2.setTooltip(new Tooltip("Button R2"));
-        button2.setButtonType(JFXButton.ButtonType.RAISED);
-        button2.getStyleClass().addAll(ANIMATED_OPTION_BUTTON, ANIMATED_OPTION_SUB_BUTTON2);
+        // 笔尖大小结点
+        JFXButton sizeButton = new JFXButton();
+        sizeButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        sizeButton.getStyleClass().add("animated-option-button-nodesList");
+        FontIcon fontIcon2 = new FontIcon();
+        fontIcon2.setIconLiteral("fas-font");
+        fontIcon2.setIconSize(24);
+        fontIcon2.getStyleClass().add("sub-icon-nodesList");
+        sizeButton.setGraphic(fontIcon2);
 
-        JFXButton button3 = new JFXButton("R3");
-        button3.setButtonType(JFXButton.ButtonType.RAISED);
-        button3.getStyleClass().addAll(ANIMATED_OPTION_BUTTON, ANIMATED_OPTION_SUB_BUTTON2);
+        // 颜色选择结点
+        JFXButton colorButton = new JFXButton("Color");
+        colorButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        colorButton.getStyleClass().add("animated-option-button-nodesList");
+        FontIcon fontIcon3 = new FontIcon();
+        fontIcon3.setIconLiteral("fas-paint-brush");
+        fontIcon3.setIconSize(24);
+        fontIcon3.getStyleClass().add("sub-icon-nodesList");
+        colorButton.setGraphic(fontIcon3);
 
-        JFXNodesList nodesList = new JFXNodesList();
-        nodesList.setRotate(90);
-        nodesList.setSpacing(20);
-        nodesList.addAnimatedNode(button2);
-
+        // 颜色选择器
         JFXColorPicker colorPicker = new JFXColorPicker(Color.BLACK);
         colorPicker.getStyleClass().add("button");
-        nodesList.addAnimatedNode(colorPicker);
         colorPicker.valueProperty().addListener(observable -> {
             Shape.color = colorPicker.getValue();
         });
 
-        JFXNodesList nodesList3 = new JFXNodesList();
-        nodesList3.setSpacing(10);
-        nodesList3.setRotate(180);
-        // init nodes
-        nodesList3.addAnimatedNode(button1);
-        nodesList3.addAnimatedNode(nodesList);
-        nodesList3.addAnimatedNode(button3);
-        nodesList3.setLayoutX(800);
-        nodesList3.setLayoutY(800);
+        // 封装颜色选择结点和颜色选择器
+        JFXNodesList colorNodesList = new JFXNodesList();
+//        colorNodesList.setRotate(90);
+        colorNodesList.setSpacing(10);
+        colorNodesList.addAnimatedNode(colorButton);
+        colorNodesList.addAnimatedNode(colorPicker);
 
-        content.getChildren().add(nodesList3);
+        // 形状选择结点
+        JFXButton shapeButton = new JFXButton("Shape");
+        shapeButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        shapeButton.getStyleClass().add("animated-option-button-nodesList");
+        FontIcon fontIcon4 = new FontIcon();
+        fontIcon4.setIconLiteral("fas-circle");
+        fontIcon4.setIconSize(24);
+        fontIcon4.getStyleClass().add("sub-icon-nodesList");
+        shapeButton.setGraphic(fontIcon4);
+
+        // 封装主结点
+        JFXNodesList nodesList = new JFXNodesList();
+        nodesList.setSpacing(10);
+        nodesList.setRotate(270);
+        nodesList.addAnimatedNode(plusButton);
+        nodesList.addAnimatedNode(sizeButton);
+        nodesList.addAnimatedNode(colorNodesList);
+        nodesList.addAnimatedNode(shapeButton);
+        nodesList.setLayoutX(0);
+//        nodesList.setTranslateX(500);
+        nodesList.setLayoutY(0);
+//        nodesList.setTranslateY(-62);
+
+        AppRun.stage.fullScreenProperty().addListener(observable -> {
+            nodesList.setVisible(AppRun.stage.isFullScreen());
+        });
+        content.getChildren().add(nodesList);
     }
 
     public Group getContent() {
