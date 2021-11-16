@@ -1,7 +1,6 @@
 package me.yuanhao.gui.main;
 
 import com.jfoenix.controls.*;
-import fxDrawing.stage.Board;
 import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
@@ -95,10 +94,10 @@ public class MainController {
     }
 
     private void setDrawer(String pptName) throws Exception{
-        Board board = new Board();
+//        Board board = new Board();
         Loader loader = new Loader(pptName);
         Pane contentPane = new Pane(
-//            board.getCanvas(),
+//            board.getCanvas()
             Loader.content
         );
 
@@ -113,9 +112,11 @@ public class MainController {
         loader.setController(Class.forName(controller).newInstance());
         popup = new JFXPopup(loader.load());
 
-        //pop up the about from left
+        // pop up the about from left
         String fxmlName = "/fxml/ui/popup/AboutPopup.fxml";
         JFXPopup finalPopup = popup;
+
+        // pop up having two types
         if (fxmlName.equals(resource)) {
             burger.setOnMouseClicked(e ->
                 finalPopup.show(burger,
