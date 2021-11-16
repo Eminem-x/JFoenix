@@ -58,18 +58,11 @@ public class ShowController {
     private void showFromCurrent() {
         AppRun.stage.setFullScreen(true);
 
+        scrollAction(-1);
+
         MainController.drawer.setOnScroll(event -> {
-            try {
-                Class<?> aClass = Class.forName("me.yuanhao.mapping.Loader");
-                Object o = aClass.newInstance();
-                Method method = aClass.getDeclaredMethod("setContent", ISlide.class);
-                method.setAccessible(true);
-                if (Loader.iterator.hasNext()) {
-                    method.invoke(o, (ISlide) Loader.iterator.next());
-                    index++;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (AppRun.stage.isFullScreen()) {
+                scrollAction(event.getDeltaY());
             }
         });
     }
