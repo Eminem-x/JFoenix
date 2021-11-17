@@ -124,23 +124,52 @@ public class EditorNodesList {
         shapeButton.setGraphic(fontIcon4);
 
         JFXToggleButton rectangleToggle = new JFXToggleButton();
+        JFXToggleButton lineToggle = new JFXToggleButton();
+        JFXToggleButton ovalToggle = new JFXToggleButton();
+
         rectangleToggle.setText("Rectangle");
         rectangleToggle.selectedProperty().addListener(observable -> {
             if (rectangleToggle.isSelected()) {
-                Shape.toolName = "OVAL";
+                Shape.toolName = "RECTANGLE";
+                ovalToggle.setSelected(false);
+                lineToggle.setSelected(false);
             } else {
-                Shape.toolName = "PEN";
+                if (!rectangleToggle.isSelected() && !lineToggle.isSelected() && !ovalToggle.isSelected()) {
+                    Shape.toolName = "PEN";
+                }
             }
         });
-        JFXToggleButton circleToggle = new JFXToggleButton();
-        circleToggle.setText("Circle        ");
-        JFXToggleButton ovalToggle = new JFXToggleButton();
+
+        lineToggle.setText("Line          ");
+        lineToggle.selectedProperty().addListener(observable -> {
+            if (lineToggle.isSelected()) {
+                Shape.toolName = "LINE";
+                rectangleToggle.setSelected(false);
+                ovalToggle.setSelected(false);
+            } else {
+                if (!rectangleToggle.isSelected() && !lineToggle.isSelected() && !ovalToggle.isSelected()) {
+                    Shape.toolName = "PEN";
+                }
+            }
+        });
+
         ovalToggle.setText("Oval          ");
+        ovalToggle.selectedProperty().addListener(observable -> {
+            if (ovalToggle.isSelected()) {
+                Shape.toolName = "OVAL";
+                lineToggle.setSelected(false);
+                rectangleToggle.setSelected(false);
+            } else {
+                if (!rectangleToggle.isSelected() && !lineToggle.isSelected() && !ovalToggle.isSelected()) {
+                    Shape.toolName = "PEN";
+                }
+            }
+        });
 
         shapeNodesList.setSpacing(10);
         shapeNodesList.getChildren().add(shapeButton);
+        shapeNodesList.getChildren().add(lineToggle);
         shapeNodesList.getChildren().add(rectangleToggle);
-        shapeNodesList.getChildren().add(circleToggle);
         shapeNodesList.getChildren().add(ovalToggle);
     }
 
