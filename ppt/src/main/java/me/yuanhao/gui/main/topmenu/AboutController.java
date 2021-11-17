@@ -13,8 +13,19 @@ public class AboutController {
 
     @FXML
     private void submit() {
-        if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 1) {
+        int choice = toolbarPopupList.getSelectionModel().getSelectedIndex();
+
+        if (choice == Function.Login.ordinal()) {
+
+        } else if(choice == Function.Contact.ordinal()) {
+
+        } else if(choice == Function.Exit.ordinal()) {
             Platform.exit();
         }
+    }
+
+    enum Function {
+        // for easy reading
+        Login, Contact, Exit
     }
 }
