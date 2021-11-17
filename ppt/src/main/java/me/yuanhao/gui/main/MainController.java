@@ -19,7 +19,7 @@ import javax.annotation.PostConstruct;
 /**
  * @author Yuanhao
  */
-
+@SuppressWarnings("all")
 @ViewController(value = "/fxml/AppRun.fxml", title = "PowerPoint")
 public class MainController {
     @FXMLViewFlowContext
@@ -93,11 +93,9 @@ public class MainController {
         setDrawer("D:\\java\\JFoenix\\ppt\\src\\main\\resources\\新建 Microsoft PowerPoint 演示文稿.pptx");
     }
 
-    private void setDrawer(String pptName) throws Exception{
-//        Board board = new Board();
+    private void setDrawer(String pptName) throws Exception {
         Loader loader = new Loader(pptName);
         Pane contentPane = new Pane(
-//            board.getCanvas()
             Loader.content
         );
 
