@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 /**
  * @author Yuanhao
  */
+@SuppressWarnings("all")
 public class ShowController {
     @FXML
     private JFXListView<?> toolbarPopupList;
@@ -77,7 +78,7 @@ public class ShowController {
 
                 // 至少第二页ppt时才回滚
                 if (Loader.slideIndex != 0) {
-                    method.invoke(o, (ISlide) Loader.slideList.get(--Loader.slideIndex));
+                    method.invoke(o, Loader.slideList.get(--Loader.slideIndex));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -90,7 +91,7 @@ public class ShowController {
                 Method method = aClass.getDeclaredMethod("setContent", ISlide.class);
                 method.setAccessible(true);
                 if (Loader.slideIndex < Loader.slideList.size() - 1) {
-                    method.invoke(o, (ISlide) Loader.slideList.get(++Loader.slideIndex));
+                    method.invoke(o, Loader.slideList.get(++Loader.slideIndex));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
