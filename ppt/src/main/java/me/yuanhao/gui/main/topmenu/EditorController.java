@@ -1,7 +1,6 @@
 package me.yuanhao.gui.main.topmenu;
 
 import com.jfoenix.controls.JFXListView;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import me.yuanhao.AppRun;
 import me.yuanhao.draw.stage.Shape;
