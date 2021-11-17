@@ -5,6 +5,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.paint.Color;
 import me.yuanhao.AppRun;
+import me.yuanhao.draw.stage.Board;
 import me.yuanhao.draw.stage.Shape;
 import org.kordamp.ikonli.javafx.FontIcon;
 
@@ -24,11 +25,11 @@ public class EditorNodesList {
         JFXButton plusButton = new JFXButton();
         plusButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         plusButton.getStyleClass().add("main-button-nodesList");
-        FontIcon fontIcon1 = new FontIcon();
-        fontIcon1.setIconLiteral("fas-plus");
-        fontIcon1.setIconSize(24);
-        fontIcon1.getStyleClass().add("main-icon-nodesList");
-        plusButton.setGraphic(fontIcon1);
+        FontIcon fontIcon = new FontIcon();
+        fontIcon.setIconLiteral("fas-plus");
+        fontIcon.setIconSize(24);
+        fontIcon.getStyleClass().add("main-icon-nodesList");
+        plusButton.setGraphic(fontIcon);
 
         // 笔尖大小结点
         JFXNodesList sizeNodesList = new JFXNodesList();
@@ -42,6 +43,14 @@ public class EditorNodesList {
         JFXNodesList shapeNodesList = new JFXNodesList();
         setShapeNode(shapeNodesList);
 
+        // 撤销结点
+        JFXButton undoButton = new JFXButton();
+        setUndoButton(undoButton);
+
+        // 重做结点
+        JFXButton clearButton = new JFXButton();
+        setClearButton(clearButton);
+
         // 封装主结点
         this.editorNodesList.setSpacing(10);
         this.editorNodesList.setRotate(270);
@@ -49,13 +58,14 @@ public class EditorNodesList {
         this.editorNodesList.addAnimatedNode(sizeNodesList);
         this.editorNodesList.addAnimatedNode(colorNodesList);
         this.editorNodesList.addAnimatedNode(shapeNodesList);
+        this.editorNodesList.addAnimatedNode(undoButton);
+        this.editorNodesList.addAnimatedNode(clearButton);
         // translate x 500, translate y -62
         this.editorNodesList.setLayoutX(0);
         this.editorNodesList.setLayoutY(0);
 
-        AppRun.stage.fullScreenProperty().addListener(observable -> {
-            this.editorNodesList.setVisible(AppRun.stage.isFullScreen());
-        });
+        AppRun.stage.fullScreenProperty().addListener(observable ->
+            this.editorNodesList.setVisible(AppRun.stage.isFullScreen()));
     }
 
     private void setSizeNode(JFXNodesList sizeNodesList) {
@@ -73,9 +83,7 @@ public class EditorNodesList {
         JFXSlider jfxSlider = new JFXSlider();
         jfxSlider.setMinHeight(500);
         jfxSlider.setOrientation(Orientation.VERTICAL);
-        jfxSlider.valueProperty().addListener(observable -> {
-            Shape.rubberSize = (int)jfxSlider.getValue();
-        });
+        jfxSlider.valueProperty().addListener(observable -> Shape.rubberSize = (int) jfxSlider.getValue());
 
         // 封装笔尖大小结点和选择器
         sizeNodesList.setSpacing(10);
@@ -97,9 +105,7 @@ public class EditorNodesList {
         // 颜色选择器
         JFXColorPicker colorPicker = new JFXColorPicker(Color.BLACK);
         colorPicker.getStyleClass().add("button");
-        colorPicker.valueProperty().addListener(observable -> {
-            Shape.color = colorPicker.getValue();
-        });
+        colorPicker.valueProperty().addListener(observable -> Shape.color = colorPicker.getValue());
 
         // 封装颜色选择结点和选择器
         colorNodesList.setSpacing(10);
@@ -117,10 +123,10 @@ public class EditorNodesList {
         fontIcon4.getStyleClass().add("sub-icon-nodesList");
         shapeButton.setGraphic(fontIcon4);
 
-        JFXToggleButton rectangleToggle= new JFXToggleButton();
+        JFXToggleButton rectangleToggle = new JFXToggleButton();
         rectangleToggle.setText("Rectangle");
         rectangleToggle.selectedProperty().addListener(observable -> {
-            if(rectangleToggle.isSelected()) {
+            if (rectangleToggle.isSelected()) {
                 Shape.toolName = "OVAL";
             } else {
                 Shape.toolName = "PEN";
@@ -136,6 +142,30 @@ public class EditorNodesList {
         shapeNodesList.getChildren().add(rectangleToggle);
         shapeNodesList.getChildren().add(circleToggle);
         shapeNodesList.getChildren().add(ovalToggle);
+    }
+
+    private void setUndoButton(JFXButton undoButton) {
+        undoButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        undoButton.getStyleClass().add("animated-option-button-nodesList");
+        FontIcon fontIcon = new FontIcon();
+        fontIcon.setIconLiteral("fas-reply");
+        fontIcon.setIconSize(24);
+        fontIcon.getStyleClass().add("sub-icon-nodesList");
+        undoButton.setGraphic(fontIcon);
+
+        undoButton.setOnMouseClicked(event -> Board.undo());
+    }
+
+    private void setClearButton(JFXButton clearButton) {
+        clearButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        clearButton.getStyleClass().add("animated-option-button-nodesList");
+        FontIcon fontIcon = new FontIcon();
+        fontIcon.setIconLiteral("fas-redo-alt");
+        fontIcon.setIconSize(24);
+        fontIcon.getStyleClass().add("sub-icon-nodesList");
+        clearButton.setGraphic(fontIcon);
+
+        clearButton.setOnMouseClicked(event -> Board.clear());
     }
 
     public JFXNodesList getJfxNodesList() {
