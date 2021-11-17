@@ -2,18 +2,17 @@ package me.yuanhao.gui.main.topmenu;
 
 import com.jfoenix.controls.JFXListView;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import me.yuanhao.AppRun;
 import me.yuanhao.mapping.Loader;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 
 /**
  * @author Yuanhao
  */
+@SuppressWarnings("all")
 public class InsertController {
     @FXML
     private JFXListView<?> toolbarPopupList;
