@@ -82,7 +82,7 @@ public class Board {
             canvas.setOnMouseExited(drawingCanvas.getOnMouseExited());
 
             if ("OVAL".equals(Shape.toolName) ||
-                "RECTANGLEZ".equals(Shape.toolName) ||
+                "RECTANGLE".equals(Shape.toolName) ||
                 "RECTANGLEY".equals(Shape.toolName)) {
                 if (!"填充".equals(Shape.lineSize)) {
                     gc.setLineWidth(Integer.parseInt(Shape.lineSize));
@@ -122,7 +122,7 @@ public class Board {
                 shapeDrawer.drawLine(x1, y1, x2, y2);
             } else if ("OVAL".equals(Shape.toolName)) {
                 shapeDrawer.drawOval(x1, y1, width, height);
-            } else if ("RECTANGLEZ".equals(Shape.toolName)) {
+            } else if ("RECTANGLE".equals(Shape.toolName)) {
                 shapeDrawer.drawRectangle(x1, y1, width, height);
             } else if ("RECTANGLEY".equals(Shape.toolName)) {
                 shapeDrawer.drawRoundRectangle(x1, y1, width, height);
