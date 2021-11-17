@@ -2,7 +2,6 @@ package me.yuanhao.mapping;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
-import com.spire.ms.System.Collections.IEnumerator;
 import com.spire.presentation.*;
 import me.yuanhao.components.EditorNodesList;
 import me.yuanhao.draw.stage.Board;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 /**
  * @author Yuanhao
  */
+@SuppressWarnings("all")
 public class Loader {
     public static Group content = new Group();
     private final Group sidePane;
@@ -59,11 +59,11 @@ public class Loader {
         for (int i = 0; i < ppt.getSlides().getCount(); i++) {
             slideList.add(ppt.getSlides().get(i));
         }
-        setContent((ISlide) slideList.get(0));
+        setContent(slideList.get(0));
 
         // 当退出幻灯片放映时 重定向至第一页
         AppRun.stage.fullScreenProperty().addListener(observable -> {
-            if(!AppRun.stage.isFullScreen()) {
+            if (!AppRun.stage.isFullScreen()) {
                 slideIndex = 0;
                 try {
                     setContent(slideList.get(slideIndex));
@@ -181,7 +181,7 @@ public class Loader {
         content.getChildren().add(imageView);
     }
 
-    private void setIAutoShape(IShape shape) throws Exception {
+    private void setIAutoShape(IShape shape) {
         IAutoShape iAutoShape = (IAutoShape) shape;
         String text = iAutoShape.getTextFrame().getText();
         System.out.println(iAutoShape.getTextFrame().getTextStyle());
@@ -204,13 +204,6 @@ public class Loader {
                 jfxTextArea.validate();
             }
         });
-        //如何选取平移
-//                jfxTextArea.setOnMouseDragged(event -> {
-//                    jfxTextArea.setLayoutX(event.getX());
-//                    jfxTextArea.setLayoutY(event.getY());
-//                });
-
-        //该如何设置离开时关闭区域
 
         content.getChildren().add(jfxTextArea);
     }
