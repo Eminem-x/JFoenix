@@ -17,15 +17,17 @@ import javafx.scene.paint.Color;
  *
  * @author Yuanhao
  */
+@SuppressWarnings("all")
 public class Board {
-    public Group content;
+    public static Group content;
     private VBox vbox;
-    private Canvas drawingCanvas;
-    private GraphicsContext gc;
+    private static Canvas drawingCanvas;
+    private static GraphicsContext gc;
+    private static Image background;
     public static int drawingCanvasWidth;
     public static int drawingCanvasHeight;
     private final Shapes2D shapeDrawer = new Shapes2D();
-    private List<Canvas> listCanvas;
+    private static List<Canvas> listCanvas;
 
     /**
      * 鼠标按下位置
@@ -41,22 +43,20 @@ public class Board {
 
     public Board(Image image) {
         // image initialed as background img
-        init(image);
+        background = image;
+        init();
     }
 
-    public void init(Image image) {
+    public void init() {
         content = new Group();
         vbox = new VBox();
-//        vbox.setAlignment(Pos.CENTER);
-//        vbox.setPadding(new Insets(10, 20, 0, 0));
         vbox.getChildren().add(content);
         listCanvas = new ArrayList<>();
 
         drawingCanvas = new Canvas(Size.CANVAS_WIDTH, Size.CANVAS_HEIGHT);
         gc = drawingCanvas.getGraphicsContext2D();
         gc.setFill(Color.WHITE);
-        gc.drawImage(image, 60, 40, 1800, 900);
-//        gc.fillRect(0, 0, Size.CANVAS_WIDTH, Size.CANVAS_HEIGHT);
+        gc.drawImage(background, 60, 40, 1800, 900);
         gc.restore();
 
         content.getChildren().add(drawingCanvas);
@@ -134,7 +134,7 @@ public class Board {
     /**
      * 撤销操作
      */
-    void undo() {
+    public static void undo() {
         if (!listCanvas.isEmpty()) {
             content.getChildren().remove(listCanvas.get(listCanvas.size() - 1));
             listCanvas.remove(listCanvas.size() - 1);
@@ -146,13 +146,13 @@ public class Board {
     }
 
     /**
-     * 更新画布，清空list，清空容器
+     * 更新画布，清空list，清空容器，但是保留背景图
      */
-    public void clear() {
+    public static void clear() {
         content.getChildren().clear();
         listCanvas.clear();
         gc.setFill(Color.WHITE);
-        gc.fillRect(0, 0, Size.CANVAS_WIDTH, Size.CANVAS_HEIGHT);
+        gc.drawImage(background, 60, 40, 1800, 900);
         gc.restore();
         content.getChildren().add(drawingCanvas);
     }
