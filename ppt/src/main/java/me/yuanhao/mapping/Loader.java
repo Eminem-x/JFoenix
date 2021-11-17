@@ -61,19 +61,17 @@ public class Loader {
         }
         setContent((ISlide) slideList.get(0));
 
-//        // 当退出幻灯片放映时 重返至第一页
-//        AppRun.stage.fullScreenProperty().addListener(observable -> {
-//            if(!AppRun.stage.isFullScreen()) {
-//                if (iterator.hasNext()) {
-//                    try {
-//                        setContent((ISlide) iterator.next());
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                    iterator.reset();
-//                }
-//            }
-//        });
+        // 当退出幻灯片放映时 重定向至第一页
+        AppRun.stage.fullScreenProperty().addListener(observable -> {
+            if(!AppRun.stage.isFullScreen()) {
+                slideIndex = 0;
+                try {
+                    setContent(slideList.get(slideIndex));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         // ppt的每一页以图片形式映射到预览图
         for (int i = 0; i < ppt.getSlides().getCount(); i++) {
