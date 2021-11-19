@@ -1,9 +1,11 @@
 package me.yuanhao.gui.main.topmenu;
 
 import com.jfoenix.controls.JFXListView;
+import com.spire.presentation.FileFormat;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import me.yuanhao.AppRun;
+import me.yuanhao.mapping.Loader;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -51,7 +53,11 @@ public class FileController {
     }
 
     private void saveFile() {
-
+        try {
+            Loader.ppt.saveToFile("sava-ppt.pptx", FileFormat.PPTX_2016);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void openFile() throws Exception {
@@ -74,6 +80,12 @@ public class FileController {
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PPT", "*.pptx"));
         fileChooser.setTitle("保存");
         File img = fileChooser.showSaveDialog(null);
+
+        try {
+            Loader.ppt.saveToFile(img.getAbsolutePath(), FileFormat.PPTX_2016);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     enum Function {
