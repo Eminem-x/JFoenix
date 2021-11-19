@@ -1,6 +1,7 @@
 package me.yuanhao.gui.main.topmenu;
 
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -66,7 +67,21 @@ public class InsertController {
     }
 
     private void insertText() {
+        JFXTextArea jfxTextArea = new JFXTextArea();
+        jfxTextArea.setLayoutX(300);
+        jfxTextArea.setLayoutY(400);
 
+        // 拖动文本框移动操作 但是不规范
+        jfxTextArea.setOnMousePressed(event -> {
+            final double deltaX = event.getX() - jfxTextArea.getLayoutX();
+            final double deltaY = event.getY() - jfxTextArea.getLayoutY();
+            jfxTextArea.setOnMouseDragged(e -> {
+                jfxTextArea.setLayoutX(e.getX() - deltaX);
+                jfxTextArea.setLayoutY(e.getY() - deltaY);
+            });
+        });
+
+        Loader.content.getChildren().add(jfxTextArea);
     }
 
     private void insertShape() {
