@@ -3,6 +3,7 @@ package me.yuanhao.mapping;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RequiredFieldValidator;
 import com.spire.presentation.*;
+import javafx.scene.control.TextArea;
 import me.yuanhao.components.EditorNodesList;
 import me.yuanhao.draw.stage.Board;
 import javafx.embed.swing.SwingFXUtils;
@@ -189,8 +190,13 @@ public class Loader {
         String text = iAutoShape.getTextFrame().getText();
         System.out.println(iAutoShape.getTextFrame().getTextStyle());
 
-        JFXTextArea jfxTextArea = new JFXTextArea(text);
-        jfxTextArea.setPromptText("文本框区域:");
+        JFXTextArea jfxTextArea = new JFXTextArea();
+        if(text.equals("Evaluation Warning : The document was created with  Spire.Presentation for Java")) {
+            jfxTextArea.setText("");
+        } else {
+            jfxTextArea.setText(text);
+        }
+//        jfxTextArea.setPromptText("文本框区域:");
         jfxTextArea.setLabelFloat(true);
         jfxTextArea.setLayoutX(iAutoShape.getTextFrame().getTextLocation().getX());
         jfxTextArea.setLayoutY(iAutoShape.getTextFrame().getTextLocation().getY());
@@ -206,6 +212,16 @@ public class Loader {
             if (!newVal) {
                 jfxTextArea.validate();
             }
+        });
+
+        // 拖动文本框移动操作 但是不规范
+        jfxTextArea.setOnMousePressed(event -> {
+            final double deltaX = event.getX() - jfxTextArea.getLayoutX();
+            final double deltaY = event.getY() - jfxTextArea.getLayoutY();
+            jfxTextArea.setOnMouseDragged(e -> {
+                jfxTextArea.setLayoutX(e.getX() - deltaX);
+                jfxTextArea.setLayoutY(e.getY() - deltaY);
+            });
         });
 
         content.getChildren().add(jfxTextArea);
