@@ -26,6 +26,9 @@ import java.util.ArrayList;
 public class Loader {
     public static Group content = new Group();
     private final Group sidePane;
+
+    public static Presentation ppt;
+
     public static ArrayList<ISlide> slideList;
     public static int slideIndex;
 
@@ -52,7 +55,7 @@ public class Loader {
         vBox.setPadding(new Insets(20));
 
         // 从指定文件中读取ppt
-        Presentation ppt = new Presentation();
+        this.ppt = new Presentation();
         ppt.loadFromFile(pptName);
 
         // 用表操作ppt每一页 与此同时映射第一页
