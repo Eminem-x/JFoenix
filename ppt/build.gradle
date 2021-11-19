@@ -16,4 +16,5 @@ dependencies {
     compile 'org.kordamp.ikonli:ikonli-fontawesome5-pack:2.4.0'
 
     compile files('libs/Spire.Presentation.jar')
+    compile files('libs/mysql-connector-java-8.0.27.jar')
 }
