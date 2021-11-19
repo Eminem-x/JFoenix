@@ -1,6 +1,8 @@
 package me.yuanhao.gui.main;
 
 import com.jfoenix.controls.*;
+import com.spire.presentation.FileFormat;
+import com.spire.presentation.Presentation;
 import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
@@ -15,6 +17,7 @@ import javafx.util.Duration;
 import me.yuanhao.mapping.Loader;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 
 /**
  * @author Yuanhao
@@ -50,12 +53,15 @@ public class MainController {
     private StackPane editorBurger;
     @FXML
     private StackPane showBurger;
+    @FXML
+    private StackPane startBurger;
 
     private JFXPopup toolbarPopup;
     private JFXPopup fileBarPopup;
     private JFXPopup insertBarPopup;
     private JFXPopup editorBarPopup;
     private JFXPopup showBarPopup;
+    private JFXPopup startBarPopup;
 
     @PostConstruct
     public void init() throws Exception {
@@ -89,8 +95,16 @@ public class MainController {
         loadController("/fxml/ui/popup/InsertPopup.fxml", "me.yuanhao.gui.main.topmenu.InsertController", insertBarPopup, insertBurger);
         loadController("/fxml/ui/popup/EditorPopup.fxml", "me.yuanhao.gui.main.topmenu.EditorController", editorBarPopup, editorBurger);
         loadController("/fxml/ui/popup/ShowPopup.fxml", "me.yuanhao.gui.main.topmenu.ShowController", showBarPopup, showBurger);
+        loadController("/fxml/ui/popup/StartPopup.fxml", "me.yuanhao.gui.main.topmenu.StartController", startBarPopup, startBurger);
 
-        setDrawer("D:\\java\\JFoenix\\ppt\\src\\main\\resources\\新建 Microsoft PowerPoint 演示文稿.pptx");
+        File file = new File("D:\\java\\JFoenix\\ppt\\src\\main\\resources\\新建 Microsoft PowerPoint 演示文稿.pptx");
+        if(!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
+        Presentation ppt = new Presentation();
+        ppt.saveToFile(file.getAbsolutePath(), FileFormat.PPTX_2016);
+        setDrawer(file.getAbsolutePath());
     }
 
     private void setDrawer(String pptName) throws Exception {
