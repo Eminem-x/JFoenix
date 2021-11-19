@@ -2,6 +2,7 @@ package me.yuanhao.gui.main.topmenu;
 
 import com.jfoenix.controls.JFXListView;
 import com.spire.presentation.FileFormat;
+import com.spire.presentation.Presentation;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import me.yuanhao.AppRun;
@@ -49,7 +50,16 @@ public class FileController {
         Object o = aClass.newInstance();
         Method method = aClass.getDeclaredMethod("setDrawer", String.class);
         method.setAccessible(true);
-        method.invoke(o, "D:\\java\\JFoenix\\ppt\\src\\main\\resources\\新建 Microsoft PowerPoint 演示文稿.pptx");
+
+        File file = new File("D:\\java\\JFoenix\\ppt\\src\\main\\resources\\新建 Microsoft PowerPoint 演示文稿.pptx");
+        if(!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
+        Presentation ppt = new Presentation();
+        ppt.saveToFile(file.getAbsolutePath(), FileFormat.PPTX_2016);
+
+        method.invoke(o, file.getAbsolutePath());
     }
 
     private void saveFile() {
