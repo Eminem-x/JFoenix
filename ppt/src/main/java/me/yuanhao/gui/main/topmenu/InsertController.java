@@ -52,6 +52,15 @@ public class InsertController {
             ImageView imageView = new ImageView("file:" + img.getPath());
             imageView.setFitHeight(300);
             imageView.setFitWidth(250);
+            // 拖动图片移动操作
+            imageView.setOnMousePressed(event -> {
+                final double deltaX = event.getX() - imageView.getX();
+                final double deltaY = event.getY() - imageView.getY();
+                imageView.setOnMouseDragged(e -> {
+                    imageView.setX(e.getX() - deltaX);
+                    imageView.setY(e.getY() - deltaY);
+                });
+            });
             Loader.content.getChildren().add(imageView);
         }
     }
